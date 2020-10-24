@@ -1,25 +1,147 @@
+/* CSS for JT Portfolio website */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Rock+Salt&display=swap");
 
 body {
   margin: 0;
-  background-color: #000;
+  background-color: #fff;
+}
+
+header {
+  height: 320px;
+  margin: 0px;
+  background: url(images/trees.jpg);
+  background-size: cover;
+}
+
+header div {
+  padding: 50px;
+  margin: auto;
+  margin-left: 17%;
 }
 
 h1 {
-  text-align: center;
-  color:#359EE9
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 56px;
-  margin-top: 150px;
-  margin-bottom: 0px;
+ text-align: center;
+ color: #FEFFFA;
+ font-family: "Rock Salt", sans-serif;
+ font-size: 36px;
+ padding: 20px, 10px, 0px, 10px;
+ margin: 18px;
 }
 
 h2 {
-  text-align: center;
-  color: #359EE9;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 34px;
-  padding-top: 12px;
-  margin: 100px;
+ text-align: center;
+ color: #FFD147;
+ font-family: "Rock Salt", sans-serif;
+ font-size: 28px;
+ padding: 10px, 10px, 50px, 10px;
+ margin: 50px;
+ text-transform:uppercase; 
 }
 
+h3 {
+  text-align: center;
+  color: #FEFFFA;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  padding: 30px, 10px, 30px, 10px;
+  margin: 0px
+}
 
+h4 {
+  text-align: center;
+  color: #194C7A;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  padding: 50px, 0px, 50px, 0px;
+  margin: 10px
+}
+
+.main-area {
+  padding-top: 380px;
+  background-color: #194C7A;
+}
+
+p, li {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #FEFFFA;
+}
+
+.wrapper {
+  width: 370px;
+  margin: auto;
+}
+
+.wrapper-article {
+  width: 370px;
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
+.wrapper-head {
+  width: 500px;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.wrapper-wide {
+  width: 600px;
+  margin: auto;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color:#D17D61;
+}
+
+a:link {
+  color:#D17D61;
+}
+
+a:visited {
+  color:#7E4E6B;
+}
+
+a:hover {
+  color:#52E4FF;
+}
+
+a:active {
+  color:#FEFFFA;
+}
+
+hr {
+  height: 1px;
+  width: 600px;
+  background-color: #FEFFFA;
+  border: none;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.footer-style {
+  height: 100px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #194C7A !important;
+  margin: auto;
+  background-color: #fff;
+  padding: 10px;
+}
+
+ol {
+  padding: 10px, 10px, 50px, 10px;
+  margin: 0px;
+}
+
+.supercenter {
+  width: auto;
+  margin: auto;
+  text-align:center;
+  display:block;
+}
