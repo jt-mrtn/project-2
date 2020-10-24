@@ -8,7 +8,7 @@ body {
 }
 
 header {
-  height: 320px;
+  height: 600px;
   margin: 0px;
   background: url(images/trees.jpg);
   background-size: cover;
@@ -58,7 +58,7 @@ h4 {
 }
 
 .main-area {
-  padding-top: 380px;
+  padding-top: 120px;
   background-color: #194C7A;
 }
 
@@ -103,7 +103,7 @@ a:link {
 }
 
 a:visited {
-  color:#7E4E6B;
+  color:#F56476;
 }
 
 a:hover {
