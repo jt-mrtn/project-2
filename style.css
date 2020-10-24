@@ -1,0 +1,25 @@
+
+body {
+  margin: 0;
+  background-color: #000;
+}
+
+h1 {
+  text-align: center;
+  color:#359EE9
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 56px;
+  margin-top: 150px;
+  margin-bottom: 0px;
+}
+
+h2 {
+  text-align: center;
+  color: #359EE9;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  padding-top: 12px;
+  margin: 100px;
+}
+
+
