@@ -5,6 +5,7 @@
 body {
   margin: 0;
   background-color: #fff;
+  min-width: 980px;
 }
 
 header {
@@ -69,26 +70,34 @@ p, li {
 }
 
 .wrapper {
-  width: 370px;
+  width: 455px;
   margin: auto;
 }
 
 .wrapper-article {
-  width: 370px;
+  width: 455px;
   margin: auto;
   padding-top: 50px;
   padding-bottom: 0px;
 }
 
 .wrapper-head {
-  width: 500px;
+  text-align: center;
+  width: auto;
   margin: auto;
   padding-top: 30px;
   padding-bottom: 50px;
 }
 
+.wrapper-under-pic {
+  width: 345px;
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
 .wrapper-wide {
-  width: 600px;
+  width: 455px;
   margin: auto;
 }
 
@@ -116,7 +125,7 @@ a:active {
 
 hr {
   height: 1px;
-  width: 600px;
+  width: 455px;
   background-color: #FEFFFA;
   border: none;
   margin-top: 50px;
@@ -124,13 +133,13 @@ hr {
 }
 
 .footer-style {
-  height: 100px;
+  height: 50px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   color: #194C7A !important;
   margin: auto;
-  background-color: #fff;
+  background-color: #FEFFFA;
   padding: 10px;
 }
 
