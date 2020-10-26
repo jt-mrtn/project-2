@@ -4,13 +4,15 @@
 
 body {
   margin: 0;
-  background-color: #fff;
-  min-width: 980px;
+  background-color: #000000;
+  /* Using min-width to avoid mobile screen issues */
+  min-width: 980px;  
 }
 
 header {
   height: 600px;
   margin: 0px;
+  /* images are photos taken by me, JT Martin */
   background: url(images/trees.jpg);
   background-size: cover;
 }
@@ -23,7 +25,7 @@ header div {
 
 h1 {
  text-align: center;
- color: #FEFFFA;
+ color: #FFFFFF;
  font-family: "Rock Salt", sans-serif;
  font-size: 36px;
  padding: 20px, 10px, 0px, 10px;
@@ -42,7 +44,7 @@ h2 {
 
 h3 {
   text-align: center;
-  color: #FEFFFA;
+  color: #FFFFFF;
   font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   padding: 30px, 10px, 30px, 10px;
@@ -68,6 +70,8 @@ p, li {
   font-size: 15px;
   color: #FEFFFA;
 }
+
+/* classes for centering elements */
 
 .wrapper {
   width: 455px;
@@ -101,18 +105,20 @@ p, li {
   margin: auto;
 }
 
+/* establishing anchor tag look and behavior */
+
 a {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
-  color:#D17D61;
+  color:#FFD147;
 }
 
 a:link {
-  color:#D17D61;
+  color:#FFD147;
 }
 
 a:visited {
-  color:#F56476;
+  color:rgb(146, 252, 146);
 }
 
 a:hover {
@@ -122,6 +128,8 @@ a:hover {
 a:active {
   color:#FEFFFA;
 }
+
+/* horizontal rule element for sectioning */
 
 hr {
   height: 1px;
@@ -153,4 +161,11 @@ ol {
   margin: auto;
   text-align:center;
   display:block;
+}
+
+.map-frame {
+  width: 455px;
+  height: 315px;
+  border: 0px;
+  padding-top: 20px;
 }
