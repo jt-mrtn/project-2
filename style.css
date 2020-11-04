@@ -182,13 +182,13 @@ ol {
   background-color: #194C7A; /* Set a background color */
   color: #FEFFFA; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
+  padding: 15px;  /* Some padding */
   /*border-radius: 30px; for Rounded corners */
-  transform: rotate(0.25turn);
+  transform: rotate(0.25turn); 
   font-family: 'Montserrat', sans-serif;
   font-size: 46px; /* Increase font size */
 }
 
 #myBtn:hover {
-  background-color: #FFD147; /* Add a dark-grey background on hover */
+  background-color: #FFD147; /* Add a background on hover */
 }
