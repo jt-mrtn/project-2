@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background-color: #000000;
+  background-color: #194C7A;
   /* Using min-width to avoid mobile screen issues */
   min-width: 980px;  
 }
@@ -40,6 +40,7 @@ h2 {
  font-size: 28px;
  padding: 10px, 10px, 50px, 10px;
  margin-top: 50px;
+ margin-bottom: 50px;
  text-transform:uppercase; 
 }
 
@@ -65,6 +66,7 @@ h4 {
 .main-area {
   padding-top: 120px;
   background-color: #194C7A;
+  margin-bottom: 30px;
 }
 
 p, li {
@@ -150,7 +152,7 @@ hr {
   color: #194C7A !important;
   margin: auto;
   background-color: #FEFFFA;
-  padding: 10px;
+  padding: 16px;
 }
 
 ol {
@@ -163,13 +165,6 @@ ol {
   margin: auto;
   text-align:center;
   display:block;
-}
-
-.map-frame {
-  width: 455px;
-  height: 315px;
-  border: 0px;
-  padding-top: 20px;
 }
 
 /* to top button */
