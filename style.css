@@ -5,7 +5,9 @@
 body {
   background-color: #143C60;
   /* Using min-width to accomodate smaller screens */
-  min-width: 980px; 
+  /*max-width: 980px; */
+  margin-left: auto;
+  margin-right: auto; 
 }
 
 header {
@@ -15,6 +17,12 @@ header {
   background-size: cover;
 }
 
+@media screen and (max-width: 635px) {
+  header {
+    height: 190px;
+  }
+}
+
 h1 {
   text-align: center;
   padding: 170px 0px 0px 0px;
@@ -22,6 +30,13 @@ h1 {
   font-family: "Rock Salt", cursive;
   font-size: 40px;
   margin: auto;
+}
+
+@media screen and (max-width: 635px) {
+  h1 {
+    padding: 80px 0px 0px 0px;
+    font-size: 20px;
+  }
 }
 
 h2 {
@@ -34,14 +49,26 @@ h2 {
   margin-bottom: 0px; */
 }
 
-h3 {
-  /* text-align: center; */
-  color: #FFD147;
-  font-family: "Rock Salt", cursive;
-  font-size: 28px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  text-transform:uppercase; 
+@media screen and (max-width: 635px) {
+  h2 {
+    font-size: 90%;
+  }
+}
+
+  h3 {
+    color: #FFD147;
+    font-family: "Rock Salt", cursive;
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-transform:uppercase; 
+}
+
+@media screen and (max-width: 635px) {
+  h3 {
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
 }
 
 h4 {
@@ -65,6 +92,13 @@ header nav {
   float: right;
 }
 
+@media screen and (max-width: 635px) {
+  header nav {
+    margin: 20px 10px 0 0;
+    font-size: 90%;
+  }
+}
+
 footer nav {
   float: right;
   margin-right: 30px;
@@ -82,6 +116,14 @@ main img {
   border-bottom-style: outset;
   border-bottom-color: #246CAE;
   border-bottom-width: thick;
+  width: 170px;
+}
+
+@media screen and (max-width: 635px) {
+  main img {
+    margin-left: 10px;
+    width: 25%;
+  }
 }
 
 .remove-und {
@@ -119,12 +161,24 @@ main {
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 635px) {
+  .main-area {
+    padding: 10px 10px 0 10px;
+    margin-bottom: 10px;
+  }
+}
+
 main p, li {
   font-family: 'Montserrat', sans-serif;
   font-size: 100%;
   color: #FEFFFA;
 }
 
+@media screen and (max-width: 635px) {
+  main p, li {
+    font-size: 90%;
+  }
+}
 /* establishing anchor tag look and behavior */
 
 header a {
@@ -158,17 +212,38 @@ a:active {
 
 /* horizontal rule element for sectioning */
 
-hr {
-  height: 1px;
-  width: 455px;
-  background-color: #FEFFFA;
-  border: none;
-  margin-top: 50px;
-  margin-bottom: 50px;
+.home-spacer {
+  height: 94px;
 }
 
-.spacer {
+.about-spacer {
   height: 20px;
+}
+
+.projects-spacer {
+  height: 124px;
+}
+
+.contact-spacer {
+  height: 90px;
+}
+
+@media screen and (max-width: 635px) {
+  .home-spacer {
+    height: 20px;
+  }
+  
+  .about-spacer {
+    height: 10px;
+  }
+  
+  .projects-spacer {
+    height: 44px;
+  }
+  
+  .contact-spacer {
+    height: 10px;
+  }
 }
 
 .error {
@@ -179,7 +254,7 @@ hr {
 }
 
 .footer-style {
-  height: 42px;
+  height: 37px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 85%;
@@ -188,6 +263,14 @@ hr {
   margin: auto;
   background-color:#000000;
   padding: 16px;
+}
+
+@media screen and (max-width: 635px) {
+  .footer-style {
+    height: 35px;
+    font-size: 75%;
+    padding: 9px;
+  }
 }
 
 .contact-footer-style {
@@ -201,6 +284,14 @@ hr {
   padding-top: 26px;
 }
 
+@media screen and (max-width: 635px) {
+  .contact-footer-style {
+    height: 35px;
+    font-size: 75%;
+    padding-top: 16px;
+  }
+}
+
 ul, ol {
   text-align: left;
 }
@@ -208,5 +299,5 @@ ul, ol {
 .list {
   margin-left: auto;
   margin-right: auto;
-  width: 980px;
+  max-width: 980px;
 }
