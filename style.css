@@ -169,7 +169,13 @@ hr {
 
 .spacer {
   height: 20px;
-  /* background-color: #ffffff; */
+}
+
+.error {
+  background-color: #ffffff;
+  text-align: center;
+  color: #194C7A;
+  margin: auto;
 }
 
 .footer-style {
