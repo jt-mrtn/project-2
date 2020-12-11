@@ -2,12 +2,18 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Rock+Salt&display=swap");
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #143C60;
-  /* Using min-width to accomodate smaller screens */
-  /*max-width: 980px; */
   margin-left: auto;
   margin-right: auto; 
+  padding-bottom: 42px;   /* same as the contact footer, to keep them at bottom of viewport */
+  min-height: 100%; /* for footer style*/
 }
 
 header {
@@ -21,6 +27,15 @@ header {
   header {
     height: 190px;
   }
+}
+
+#container {
+  min-height: 100%;
+  min-width: 220px;
+  max-width: 980px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {
@@ -81,10 +96,8 @@ h4 {
 }
 
 header nav {
-  /* border: 1px solid #FFD147; */
   padding: 10px 10px 10px 10px;
   margin: 60px 20px 0 0;
-  width: 50%;
   color: #f4f4f4;
   font-family: 'Montserrat', sans-serif;
   font-size: 110%;
@@ -95,8 +108,8 @@ header nav {
 @media screen and (max-width: 635px) {
   header nav {
     margin: 20px 10px 0 0;
-    font-size: 90%;
-  }
+    font-size:  90%;
+  }   
 }
 
 footer nav {
@@ -116,25 +129,19 @@ main img {
   border-bottom-style: outset;
   border-bottom-color: #246CAE;
   border-bottom-width: thick;
+  margin: 10px 5px 0 0;
   width: 170px;
 }
 
 @media screen and (max-width: 635px) {
   main img {
-    margin-left: 10px;
+    margin: 5px 5px 10px 10px;
     width: 25%;
   }
 }
 
 .remove-und {
   text-decoration: none;
-}
-
-header:after,
-nav:after {
-  content: " ";
-  display: table;
-  clear: both;
 }
 
 main:after,
@@ -157,13 +164,15 @@ main {
 }
 
 .main-area {
-  padding: 30px 30px 0 30px;
+  padding: 30px 30px 30px 30px;
   margin-bottom: 30px;
+  min-height: 100%;
+  position: relative;
 }
 
 @media screen and (max-width: 635px) {
   .main-area {
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 20px 10px;
     margin-bottom: 10px;
   }
 }
@@ -180,18 +189,14 @@ main p, li {
   }
 }
 /* establishing anchor tag look and behavior */
-
-header a {
+a {
   font-family: 'Montserrat', sans-serif;
   font-size: 100%;
   color:#FEFFFA;
-  text-decoration: none;
 }
 
-main a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 100%;
-  color:#FEFFFA;
+header a {
+  text-decoration: none;
 }
 
 a:link {
@@ -210,42 +215,7 @@ a:active {
   color: rgb(146, 252, 146);
 }
 
-/* horizontal rule element for sectioning */
-
-.home-spacer {
-  height: 94px;
-}
-
-.about-spacer {
-  height: 20px;
-}
-
-.projects-spacer {
-  height: 124px;
-}
-
-.contact-spacer {
-  height: 90px;
-}
-
-@media screen and (max-width: 635px) {
-  .home-spacer {
-    height: 20px;
-  }
-  
-  .about-spacer {
-    height: 10px;
-  }
-  
-  .projects-spacer {
-    height: 44px;
-  }
-  
-  .contact-spacer {
-    height: 10px;
-  }
-}
-
+/* for 404 page not found */
 .error {
   background-color: #ffffff;
   text-align: center;
@@ -254,50 +224,31 @@ a:active {
 }
 
 .footer-style {
-  height: 37px;
-  text-align: center;
+  width: 100%;
+  height: 42px;
+  text-align: left;
   font-family: 'Montserrat', sans-serif;
   font-size: 85%;
   font-weight: lighter;
   color: #979797;
-  margin: auto;
+  /* margin: auto; */
   background-color:#000000;
-  padding: 16px;
+  padding: 26px 0 0 30px;
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 950px;
 }
 
 @media screen and (max-width: 635px) {
   .footer-style {
     height: 35px;
     font-size: 75%;
-    padding: 9px;
-  }
-}
-
-.contact-footer-style {
-  height: 42px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 85%;
-  font-weight: lighter;
-  color: #979797;
-  background-color:#000000;
-  padding-top: 26px;
-}
-
-@media screen and (max-width: 635px) {
-  .contact-footer-style {
-    height: 35px;
-    font-size: 75%;
-    padding-top: 16px;
+    padding: 16px 0 0 10px;
   }
 }
 
 ul, ol {
   text-align: left;
-}
-
-.list {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 980px;
 }
