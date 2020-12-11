@@ -165,15 +165,15 @@ main {
 
 .main-area {
   padding: 30px 30px 30px 30px;
-  margin-bottom: 30px;
-  min-height: 100%;
-  position: relative;
+  /* margin-bottom: 30px; */
+  /* min-height: 100%; */
+  /* position: relative; */
 }
 
 @media screen and (max-width: 635px) {
   .main-area {
     padding: 10px 10px 20px 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 }
 
