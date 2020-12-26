@@ -242,18 +242,23 @@ ol {
   text-align: left;
 }
 
-main div section p {
-  color: #979797;
-  text-align: center;
-}
-
 /* Placeholders for projects */
+
+main div section p {
+  color: #f4f4f4;
+  text-align: center;
+  font-size: 90%;
+  font-weight: lighter;
+}
 
 main div section hr {
   width: 480px;
-  border: #979797 1px solid;
+  border: none;
+  padding: 1px;
   margin-top: 20px;
   margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
 }
 
 @media screen and (max-width: 635px) {
