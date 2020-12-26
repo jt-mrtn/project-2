@@ -244,6 +244,10 @@ ol {
 
 /* Placeholders for projects */
 
+section {
+  padding-top: 10px;
+}
+
 main div section p {
   color: #f4f4f4;
   text-align: center;
@@ -258,7 +262,7 @@ main div section hr {
   margin-top: 20px;
   margin-bottom: 20px;
   box-sizing: border-box;
-  background-color: #f4f4f4;
+  background-color: #cacaca;
 }
 
 @media screen and (max-width: 635px) {
