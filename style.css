@@ -243,7 +243,7 @@ ol {
 }
 
 main div section p {
-  color: #143c60;
+  color: #979797;
   text-align: center;
 }
 
@@ -251,7 +251,7 @@ main div section p {
 
 main div section hr {
   width: 480px;
-  border: #143c60 1px solid;
+  border: #979797 1px solid;
   margin-top: 20px;
   margin-bottom: 20px;
 }
