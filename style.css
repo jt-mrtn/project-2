@@ -2,22 +2,23 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Rock+Salt&display=swap");
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: #143C60;
+  background-color: #143c60;
   margin-left: auto;
-  margin-right: auto; 
-  padding-bottom: 42px;   /* same as footer, to keep at bottom of viewport */
-  min-height: 100%;  
+  margin-right: auto;
+  padding-bottom: 42px; /* same as footer, to keep at bottom of viewport */
+  min-height: 100%;
 }
 
 header {
-  height: 360px; 
+  height: 360px;
   /* all images are photos taken by me, JT Martin */
   background: url(images/trees.jpg);
   background-size: cover;
@@ -41,7 +42,7 @@ header {
 h1 {
   text-align: center;
   padding: 170px 0px 0px 0px;
-  color:  #ffffff;
+  color: #ffffff;
   font-family: "Rock Salt", cursive;
   font-size: 40px;
   margin: auto;
@@ -57,7 +58,7 @@ h1 {
 h2 {
   text-align: center;
   color: #f4f4f4;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: lighter;
 }
@@ -69,12 +70,12 @@ h2 {
 }
 
 h3 {
-  color: #FFD147;
+  color: #ffd147;
   font-family: "Rock Salt", cursive;
   font-size: 28px;
   margin-top: 20px;
   margin-bottom: 50px;
-  text-transform:uppercase; 
+  text-transform: uppercase;
 }
 
 @media screen and (max-width: 635px) {
@@ -92,7 +93,7 @@ header nav {
   padding: 10px 10px 10px 10px;
   margin: 60px 20px 0 0;
   color: #f4f4f4;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 110%;
   text-align: right;
 }
@@ -100,8 +101,8 @@ header nav {
 @media screen and (max-width: 635px) {
   header nav {
     margin: 20px 10px 0 0;
-    font-size:  90%;
-  }   
+    font-size: 90%;
+  }
 }
 
 footer nav {
@@ -115,10 +116,9 @@ footer img {
 }
 
 main img {
-  /* margin: 15px 15px 15px 15px; */
   float: right;
   border-bottom-style: outset;
-  border-bottom-color: #246CAE;
+  border-bottom-color: #246cae;
   border-bottom-width: thick;
   margin: 10px 5px 0 0;
   width: 170px;
@@ -150,7 +150,7 @@ img:after {
 }
 
 main {
-  background-color: #194C7A; 
+  background-color: #194c7a;
   width: 100%;
 }
 
@@ -164,22 +164,24 @@ main {
   }
 }
 
-main p, li {
-  font-family: 'Montserrat', sans-serif;
+main p,
+li {
+  font-family: "Montserrat", sans-serif;
   font-size: 100%;
-  color: #FEFFFA;
+  color: #fefffa;
 }
 
 @media screen and (max-width: 635px) {
-  main p, li {
+  main p,
+  li {
     font-size: 90%;
   }
 }
 /* establishing anchor tag look and behavior */
 a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 100%;
-  color:#FEFFFA;
+  color: #fefffa;
 }
 
 header a {
@@ -187,15 +189,15 @@ header a {
 }
 
 a:link {
-  color:#FEFFFA;
+  color: #fefffa;
 }
 
 a:visited {
-  color:#FFD147;
+  color: #ffd147;
 }
 
 a:hover {
-  color:#52E4FF;
+  color: #52e4ff;
 }
 
 a:active {
@@ -206,7 +208,7 @@ a:active {
 .error {
   background-color: #ffffff;
   text-align: center;
-  color: #194C7A;
+  color: #194c7a;
   margin: auto;
 }
 
@@ -214,11 +216,11 @@ a:active {
   width: 100%;
   height: 42px;
   text-align: left;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 85%;
   font-weight: lighter;
   color: #979797;
-  background-color:#000000;
+  background-color: #000000;
   padding: 26px 0 0 30px;
   position: absolute;
   bottom: 0;
@@ -235,6 +237,29 @@ a:active {
   }
 }
 
-ul, ol {
+ul,
+ol {
   text-align: left;
+}
+
+main div section p {
+  color: #143c60;
+  text-align: center;
+}
+
+/* Placeholders for projects */
+
+main div section hr {
+  width: 480px;
+  border: #143c60 1px solid;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 635px) {
+  main div section hr {
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
