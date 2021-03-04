@@ -14,7 +14,9 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 42px; /* same as footer, to keep at bottom of viewport */
-  min-height: 100%;
+  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 header {
@@ -85,6 +87,14 @@ h3 {
   }
 }
 
+h4 {
+  text-align: left;
+  color: #ee0082;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
 nav {
   float: right;
 }
@@ -152,6 +162,7 @@ img:after {
 main {
   background-color: #194c7a;
   width: 100%;
+  /* flex: 1; */
 }
 
 .main-area {
@@ -222,7 +233,7 @@ a:active {
   color: #979797;
   background-color: #000000;
   padding: 26px 0 0 30px;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   margin-left: auto;
   margin-right: auto;
@@ -250,16 +261,17 @@ section {
 
 main div section p {
   color: #f4f4f4;
-  text-align: center;
+  text-align: left;
   font-size: 90%;
   font-weight: lighter;
 }
 
 main div section hr {
-  width: 480px;
+  width: 60%;
+  height: 1px;
   border: none;
   padding: 1px;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 20px;
   box-sizing: border-box;
   background-color: #cacaca;
@@ -271,4 +283,15 @@ main div section hr {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
+
+/*  Projects */
+
+article img {
+  float: right;
+  border-bottom-style: outset;
+  border-bottom-color: #246cae;
+  border-bottom-width: thick;
+  margin: 65px 5px 20px 20px;
+  width: 170px;
 }
