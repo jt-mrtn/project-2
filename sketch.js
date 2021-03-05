@@ -51,6 +51,11 @@ function draw() {
     var gxx = map(mouseX, 0, width, 44, 255);
     var bxx = map(mouseX, 0, width, 21, 255);
     background(rxx, gxx + w * 10, bxx + z * 10, 2);
+    strokeWeight(1);
+    stroke(0, 2);
+    for (let i = 5; i < height; i += 5) {
+      line(0, i, width, i);
+    }
   } else {
     background(0, 5);
   }
