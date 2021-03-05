@@ -45,7 +45,19 @@ function draw() {
     mouseX < width / 2 ? (bx = 130) : (bx = 38);
     background(rx, gx + z / 20, bx, 7 - weight / 10);
   } else if (mouseButton == CENTER) {
-    background(0, 0, 196 - w * 0.9, 3);
+    background(0, 0, 196 - w * 0.9, 7);
+    strokeWeight(1);
+    //stroke(76, 233, 254, 3);
+    for (let i = -150; i < width + 150; i += 300) {
+      for (let j = -150; j < height + 150; j += 300) {
+        stroke(76, 233, 254, 3);
+        line(i, j, x, y);
+        line(i + 150, j + 150, x + spacing, y);
+        stroke(255);
+        point(i, j);
+        point(i + 150, j + 150);
+      }
+    }
   } else if (mouseButton == RIGHT) {
     var rxx = map(mouseX, 0, width, 14, 201);
     var gxx = map(mouseX, 0, width, 44, 255);
