@@ -15,6 +15,7 @@ var radius = 8;
 var pupils = 4;
 var spacing = 40;
 var boom = 60;
+// default yellow - opening mood
 var r = 254;
 var g = 213;
 var b = 38;
@@ -28,13 +29,6 @@ function setup() {
 }
 
 function draw() {
-  if (mouseButton == LEFT) {
-    background(238, 0, 130, 20);
-  } else if (mouseButton == CENTER) {
-    background(0, 0, 196, 3);
-  } else {
-    background(0, 3);
-  }
   var targetX = mouseX;
   x += (targetX - x) * easing;
   var targetY = mouseY;
@@ -43,6 +37,25 @@ function draw() {
   w = map(x, 0, width, 0, 255);
   z = map(y, 0, height, 0, 255);
 
+  // set up backgrounds
+  if (mouseButton == LEFT) {
+    var rx = map(mouseX, 0, width, 238, 254);
+    var gx = map(mouseX, 0, width, 0, 213);
+    var bx = 0;
+    mouseX < width / 2 ? (bx = 130) : (bx = 38);
+    background(rx, gx + z / 20, bx, 7 - weight / 10);
+  } else if (mouseButton == CENTER) {
+    background(0, 0, 196 - w * 0.9, 3);
+  } else if (mouseButton == RIGHT) {
+    var rxx = map(mouseX, 0, width, 14, 201);
+    var gxx = map(mouseX, 0, width, 44, 255);
+    var bxx = map(mouseX, 0, width, 21, 255);
+    background(rxx, gxx + w * 10, bxx + z * 10, 2);
+  } else {
+    background(0, 5);
+  }
+
+  // set up eye colors
   if (mouseIsPressed) {
     if (mouseButton == LEFT) {
       // blue
@@ -80,24 +93,11 @@ function draw() {
       pupils = radius / 2;
       spacing = 460;
       easing = 0.09;
-    } else {
-      // magenta
-      r = 238;
-      g = 0;
-      b = 130;
-      e = 255;
-      mult = 1.6;
-      boom = 70;
-      radius = 8;
-      pupils = radius / 2;
-      spacing = 40;
-      easing = 0.04;
     }
   }
 
   strokeWeight(weight * boom);
   stroke(r, g, b - weight, 50 - 3 * weight);
-  //stroke(r + w, g, b, 50 - 3 * weight);
   line(x, y, px, py);
   line(x + spacing, y, px + spacing, py);
   px = x;
