@@ -88,11 +88,12 @@ h3 {
 }
 
 h4 {
-  text-align: left;
-  color: #ff79ff;
-  font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  font-family: "IndustrialRegular", "Montserrat", sans-serif;
   font-weight: lighter;
+  font-style: normal;
+  text-align: center;
+  color: #ff79ff;
+  font-size: 34px;
 }
 
 nav {
@@ -199,6 +200,10 @@ header a {
   text-decoration: none;
 }
 
+.proj-link a:link {
+  color: #ff79ff;
+}
+
 a:link {
   color: #fefffa;
 }
@@ -208,6 +213,11 @@ a:visited {
 }
 
 a:hover {
+  color: #52e4ff;
+  font-size: 105%;
+}
+
+.proj-link a:hover {
   color: #52e4ff;
 }
 
@@ -255,9 +265,9 @@ ol {
 
 /* Placeholders for projects */
 
-section {
+/* section {
   padding-top: 10px;
-}
+} */
 
 main div section p {
   color: #f4f4f4;
@@ -271,10 +281,9 @@ main div section hr {
   height: 1px;
   border: none;
   padding: 1px;
-  margin-top: 40px;
+  margin-top: 10px;
   margin-bottom: 20px;
   box-sizing: border-box;
-  background-color: #cacaca;
 }
 
 @media screen and (max-width: 635px) {
@@ -292,6 +301,6 @@ article img {
   border-bottom-style: outset;
   border-bottom-color: #246cae;
   border-bottom-width: thick;
-  margin: 65px 5px 20px 20px;
+  margin: 20px 5px 20px 20px;
   width: 170px;
 }
