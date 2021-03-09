@@ -5,8 +5,8 @@
 // 2. Press Esc key after pressing right button.
 // 3. There are 4 different sizes. Refresh page to return to the smallest.
 
-var x = 10;
-var y = 10;
+var x = 0;
+var y = 0;
 var px = 0;
 var py = 0;
 var mult = 1.6;
@@ -15,6 +15,7 @@ var radius = 8;
 var pupils = 4;
 var spacing = 40;
 var boom = 60;
+var count = 1;
 // default yellow - opening mood
 var r = 254;
 var g = 213;
@@ -22,6 +23,8 @@ var b = 38;
 var e = 255;
 var h = 2;
 var z = 0;
+var angle = 0.0;
+var speed = 0.09;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -37,27 +40,47 @@ function draw() {
   w = map(x, 0, width, 0, 255);
   z = map(y, 0, height, 0, 255);
 
-  // set up backgrounds
+  // set up psychedelic backgrounds
   if (mouseButton == LEFT) {
     var rx = map(mouseX, 0, width, 238, 254);
     var gx = map(mouseX, 0, width, 0, 213);
     var bx = 0;
     mouseX < width / 2 ? (bx = 130) : (bx = 38);
-    background(rx, gx + z / 20, bx, 7 - weight / 10);
+    background(rx, gx + z / 5, bx, 7);
+    strokeWeight(10);
+    push();
+    translate(width / 2, height / 2);
+    rotate(angle);
+    for (var i = -3 * width; i < 3 * width; i += 37) {
+      rx = 76;
+      gx = 233;
+      bx = 254;
+      stroke(rx, gx, bx);
+      line(i, -3 * height, i, 3 * height);
+    }
+
+    for (var i = -3 * height; i < 3 * height; i += 37) {
+      rx = 76;
+      gx = 233;
+      bx = 254;
+      stroke(rx, gx, bx);
+      line(-3 * width, i, 3 * width, i);
+    }
+    pop();
   } else if (mouseButton == CENTER) {
     background(0, 0, 196 - w * 0.9, 7);
+    push();
+    translate(width * 1.75, height * 0.75);
+    rotate(angle * 0.9);
     strokeWeight(1);
-    //stroke(76, 233, 254, 3);
-    for (let i = -150; i < width + 150; i += 300) {
-      for (let j = -150; j < height + 150; j += 300) {
-        stroke(76, 233, 254, 3);
-        line(i, j, x, y);
-        line(i + 150, j + 150, x + spacing, y);
+    for (let i = -150; i < 2 * width + 150; i += 100 * 1.6) {
+      for (let j = -150; j < 2 * height + 150; j += 100 * 1.6) {
+        let r = random(60);
         stroke(255);
-        point(i, j);
-        point(i + 150, j + 150);
+        point(width - i * r, 91 * r + j);
       }
     }
+    pop();
   } else if (mouseButton == RIGHT) {
     var rxx = map(mouseX, 0, width, 14, 201);
     var gxx = map(mouseX, 0, width, 44, 255);
@@ -495,4 +518,6 @@ function draw() {
     arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 343, 344);
     arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 346, 347);
   }
+  angle += 1 * speed;
+  count++;
 }
