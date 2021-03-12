@@ -2,6 +2,11 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Rock+Salt&display=swap");
 
+@font-face {
+  font-family: Robus;
+  src: url(./projects/draceana/Robus-BWqOd.otf);
+}
+
 html,
 body {
   height: 100%;
@@ -91,7 +96,7 @@ h4 {
   font-family: "IndustrialRegular", "Montserrat", sans-serif;
   font-weight: lighter;
   font-style: normal;
-  text-align: center;
+  text-align: left;
   color: #ff79ff;
   font-size: 34px;
 }
@@ -167,7 +172,7 @@ main {
 }
 
 .main-area {
-  padding: 30px 30px 40px 30px;
+  padding: 30px 30px 30px 30px;
 }
 
 @media screen and (max-width: 635px) {
@@ -263,12 +268,6 @@ ol {
   text-align: left;
 }
 
-/* Placeholders for projects */
-
-/* section {
-  padding-top: 10px;
-} */
-
 main div section p {
   color: #f4f4f4;
   text-align: left;
@@ -301,6 +300,46 @@ article img {
   border-bottom-style: outset;
   border-bottom-color: #246cae;
   border-bottom-width: thick;
-  margin: 20px 5px 20px 20px;
+  margin: 0px 0px 25px 25px;
   width: 170px;
+}
+
+article {
+  text-align: justify;
+  padding-top: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 30px;
+}
+
+.btn {
+  display: flexbox;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #143c60;
+  border-color: #143c60;
+}
+
+.btn-dracaena {
+  font-family: Robus, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 56px;
+}
+
+.btn-eyes {
+  font-family: "IndustrialRegular", "Montserrat", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 34px;
+}
+
+.btn-sm {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
