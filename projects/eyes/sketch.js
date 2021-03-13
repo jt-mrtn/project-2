@@ -137,13 +137,37 @@ function draw() {
     for (let i = 5; i < height; i += 5) {
       line(0, i, width, i);
     }
-  } else {
-    background(0, 5); // do I need to specify for click == 1 ?
+  } else if (
+    (click == 1 &&
+      mouseButton != RIGHT &&
+      mouseButton != LEFT &&
+      mouseButton != CENTER) ||
+    (click == 1 && mouseButton == LEFT)
+  ) {
+    background(0, 3);
   }
 
   // set up eye colors
   if (mouseIsPressed) {
-    if ((mouseButton == LEFT) & (click == 2)) {
+    if (
+      (click == 1 &&
+        mouseButton != RIGHT &&
+        mouseButton != LEFT &&
+        mouseButton != CENTER) ||
+      (click == 1 && mouseButton == LEFT)
+    ) {
+      // yellow
+      r = 254;
+      g = 213;
+      b = 38;
+      e = 255;
+      mult = 1.6;
+      boom = 60;
+      radius = 8;
+      pupils = 4;
+      spacing = 40;
+      easing = 0.06;
+    } else if ((mouseButton == LEFT) & (click == 2)) {
       // blue
       r = 55;
       g = 40;
@@ -341,7 +365,7 @@ function draw() {
     );
   }
 
-  // "whites" of the eyes
+  // "whites" of the eyes for all moods
   noStroke();
   strokeWeight(1);
   if (mouseIsPressed) {
