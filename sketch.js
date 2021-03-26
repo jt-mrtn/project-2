@@ -1,523 +1,874 @@
-// Kaleidoscope Eyes
-// Author: J.T. Martin
+/*
+Some of Oz · A nonlinear narrative 
+Author: JT Martin
+*/
 
-// 1. Left, right and middle mouse buttons cause eyes to change.
-// 2. Press Esc key after pressing right button.
-// 3. There are 4 different sizes. Refresh page to return to the smallest.
+// state variables declaration
+var state = 1.0;
+var typed = "";
 
-var x = 0;
-var y = 0;
-var px = 0;
-var py = 0;
-var mult = 1.6;
-var easing = 0.06;
-var radius = 8;
-var pupils = 4;
-var spacing = 40;
-var boom = 60;
-var count = 1;
-// default yellow - opening mood
-var r = 254;
-var g = 213;
-var b = 38;
-var e = 255;
-var h = 2;
-var z = 0;
-var angle = 0.0;
-var speed = 0.09;
+// set up state logic
+function keyTyped() {
+  if (key == 1) {
+    state = 1.0; // kansas
+  } else if (key == 2) {
+    state = 2.0; // yellow brick road
+  } else if (key == 3) {
+    state = 3.0; // flying monkeys
+  } else if (key == 4) {
+    state = 4.0; // emerald city
+  } else if (keyCode == RETURN) {
+    // 24 STATES:
+    // kansas (6)
+    if (typed.toLowerCase() == "kansas") {
+      state = 1.0;
+      typed = "";
+    } else if (typed.toLowerCase() == "toto") {
+      state = 1.1;
+      typed = "";
+    } else if (typed.toLowerCase() == "house") {
+      state = 1.2;
+      typed = "";
+    } else if (typed.toLowerCase() == "dorothy") {
+      state = 1.3;
+      typed = "";
+    } else if (typed.toLowerCase() == "tornado") {
+      state = 1.4;
+      typed = "";
+    } else if (typed.toLowerCase() == "all" && state < 2) {
+      state = 1.9;
+      typed = "";
+    }
+    // yellow brick road (6)
+    else if (typed.toLowerCase() == "yellow brick road") {
+      state = 2.0;
+      typed = "";
+    } else if (typed.toLowerCase() == "scarecrow") {
+      state = 2.1;
+      typed = "";
+    } else if (typed.toLowerCase() == "lion") {
+      state = 2.2;
+      typed = "";
+    } else if (typed.toLowerCase() == "tinman") {
+      state = 2.3;
+      typed = "";
+    } else if (typed.toLowerCase() == "poppies") {
+      state = 2.4;
+      typed = "";
+    } else if (typed.toLowerCase() == "all" && state > 1 && state < 3) {
+      state = 2.9;
+      typed = "";
+    }
+    // flying monkeys (5)
+    else if (typed.toLowerCase() == "flying monkeys") {
+      state = 3.0;
+      typed = "";
+    } else if (typed.toLowerCase() == "witch") {
+      state = 3.1;
+      typed = "";
+    } else if (typed.toLowerCase() == "crystal ball") {
+      state = 3.2;
+      typed = "";
+    } else if (typed.toLowerCase() == "guards") {
+      state = 3.3;
+      typed = "";
+    } else if (typed.toLowerCase() == "all" && state > 2 && state < 4) {
+      state = 3.9;
+      typed = "";
+    }
+    // emerald city (7)
+    else if (typed.toLowerCase() == "emerald city") {
+      state = 4.0;
+      typed = "";
+    } else if (typed.toLowerCase() == "fire") {
+      state = 4.1;
+      typed = "";
+    } else if (typed.toLowerCase() == "wizard") {
+      state = 4.2;
+      typed = "";
+    } else if (typed.toLowerCase() == "glinda") {
+      state = 4.3;
+      typed = "";
+    } else if (typed.toLowerCase() == "balloon") {
+      state = 4.4;
+      typed = "";
+    } else if (typed.toLowerCase() == "ruby") {
+      state = 4.5;
+      typed = "";
+    } else if (typed.toLowerCase() == "all" && state > 3) {
+      state = 4.9;
+      typed = "";
+    }
+  } else {
+    typed += key;
+  }
+}
+
+// set up allowance for clearing text
+function keyPressed() {
+  if (keyCode == BACKSPACE || keyCode == DELETE) {
+    typed = "";
+  }
+}
+
+// image variables...
+// kansas
+var stormy, toto, house, dorothy, shift;
+
+// yellow brick road (ybr)
+var bluesky, tinMan, lion, scarecrow;
+
+// flying monkeys (fm)
+var flymonkey1, flymonkey2, witch, ball, guards;
+
+// emerald city (ec)
+var ozSky, glinda, wiz, wizFire, ruby, balloon;
+
+function preload() {
+  // kansas
+  stormy = loadImage("images/stormy-sky.jpg");
+  toto = loadImage("images/toto.jpg");
+  dorothy = loadImage("images/dorothy1.jpg");
+  house = loadImage("images/spinning-house.gif");
+  shift = loadImage("images/shift.jpg");
+  // ybr
+  bluesky = loadImage("images/blue-sky.jpg");
+  lion = loadImage("images/lion.jpg");
+  tinMan = loadImage("images/tin-man.jpg");
+  scarecrow = loadImage("images/scarecrow.gif");
+  // fm
+  flymonkey1 = loadImage("images/fly-monkey1.jpg");
+  flymonkey2 = loadImage("images/fly-monkey2.jpg");
+  witch = loadImage("images/wicked-witch.jpg");
+  ball = loadImage("images/ball.gif");
+  guards = loadImage("images/guards.jpg");
+  // ec
+  ozSky = loadImage("images/oz-sky.jpg");
+  glinda = loadImage("images/glenda.jpg");
+  wiz = loadImage("images/wiz.jpg");
+  wizFire = loadImage("images/wiz-fire.jpg");
+  ruby = loadImage("images/ruby.gif");
+  balloon = loadImage("images/balloon.jpg");
+}
+
+var ec = []; // wizard of oz
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  createCanvas(1142, 886);
+  textFont("MiTicaRegular");
+  textStyle(NORMAL);
+  ec = ["y", "t", "i", "C", " ", "d", "l", "a", "r", "e", "m", "E"];
 }
 
 function draw() {
-  var targetX = mouseX;
-  x += (targetX - x) * easing;
-  var targetY = mouseY;
-  y += (targetY - y) * easing;
-  var weight = dist(x, y, px, py) * 3;
-  w = map(x, 0, width, 0, 255);
-  z = map(y, 0, height, 0, 255);
+  //tornado image
+  var y1 = map(mouseY, 0, height, -60, -30); //1
+  var y2 = map(mouseY, 0, height, -60, 0);
+  var y3 = map(mouseY, 0, height, -60, 30);
+  var y4 = map(mouseY, 0, height, -60, 60);
 
-  // set up psychedelic backgrounds
-  if (mouseButton == LEFT) {
-    var rx = map(mouseX, 0, width, 238, 254);
-    var gx = map(mouseX, 0, width, 0, 213);
-    var bx = 0;
-    mouseX < width / 2 ? (bx = 130) : (bx = 38);
-    background(rx, gx + z / 5, bx, 7);
-    strokeWeight(10);
-    push();
-    translate(width / 2, height / 2);
-    rotate(angle);
-    for (var i = -3 * width; i < 3 * width; i += 37) {
-      rx = 76;
-      gx = 233;
-      bx = 254;
-      stroke(rx, gx, bx);
-      line(i, -3 * height, i, 3 * height);
+  var y5 = map(mouseY, 0, height, -60, 90); //2
+  var y6 = map(mouseY, 0, height, -60, 119);
+  var y7 = map(mouseY, 0, height, -60, 147);
+  var y8 = map(mouseY, 0, height, -60, 175);
+
+  var y9 = map(mouseY, 0, height, -60, 203); //3
+  var y10 = map(mouseY, 0, height, -60, 230);
+  var y11 = map(mouseY, 0, height, -60, 257);
+  var y12 = map(mouseY, 0, height, -60, 283);
+
+  var y13 = map(mouseY, 0, height, -60, 309); //4
+  var y14 = map(mouseY, 0, height, -60, 334);
+  var y15 = map(mouseY, 0, height, -60, 359);
+  var y16 = map(mouseY, 0, height, -60, 383);
+
+  var y17 = map(mouseY, 0, height, -60, 407); //5
+  var y18 = map(mouseY, 0, height, -60, 430);
+  var y19 = map(mouseY, 0, height, -60, 453);
+  var y20 = map(mouseY, 0, height, -60, 475);
+
+  var y21 = map(mouseY, 0, height, -60, 497); //6
+  var y22 = map(mouseY, 0, height, -60, 518);
+  var y23 = map(mouseY, 0, height, -60, 539);
+  var y24 = map(mouseY, 0, height, -60, 559);
+
+  var y25 = map(mouseY, 0, height, -60, 579); //7
+  var y26 = map(mouseY, 0, height, -60, 598);
+  var y27 = map(mouseY, 0, height, -60, 616);
+  var y28 = map(mouseY, 0, height, -60, 633);
+
+  var y29 = map(mouseY, 0, height, -60, 649); //8
+  var y30 = map(mouseY, 0, height, -60, 664);
+  var y31 = map(mouseY, 0, height, -60, 678);
+  var y32 = map(mouseY, 0, height, -60, 691);
+
+  var y32b = map(mouseY, 0, height, -60, 703);
+
+  var y33 = map(mouseY, 0, height, -60, 714); //9
+  var y34 = map(mouseY, 0, height, -60, 724);
+  var y35 = map(mouseY, 0, height, -60, 733);
+  var y36 = map(mouseY, 0, height, -60, 741);
+
+  var y37 = map(mouseY, 0, height, -60, 748); //10
+  var y38 = map(mouseY, 0, height, -60, 754);
+  var y39 = map(mouseY, 0, height, -60, 759);
+  var y40 = map(mouseY, 0, height, -60, 763);
+
+  var y41 = map(mouseY, 0, height, -60, 767); //11
+  var y42 = map(mouseY, 0, height, -60, 770);
+  var y43 = map(mouseY, 0, height, -60, 772);
+  var y44 = map(mouseY, 0, height, -60, 774);
+
+  var y45 = map(mouseY, 0, height, -60, 776); //12
+  var y46 = map(mouseY, 0, height, -60, 778);
+  var y47 = map(mouseY, 0, height, -60, 780);
+  var y48 = map(mouseY, 0, height, -60, 782);
+
+  var y49 = map(mouseY, 0, height, -60, 784); //13
+  var y50 = map(mouseY, 0, height, -60, 786);
+  var y51 = map(mouseY, 0, height, -60, 788);
+  var y52 = map(mouseY, 0, height, -60, 790);
+
+  var y53 = map(mouseY, 0, height, -60, 792); //14
+  var y54 = map(mouseY, 0, height, -60, 794);
+  var y55 = map(mouseY, 0, height, -60, 796);
+  var y56 = map(mouseY, 0, height, -60, 798);
+
+  var y57 = map(mouseY, 0, height, -60, 800); //15
+  var y58 = map(mouseY, 0, height, -60, 802);
+  var y59 = map(mouseY, 0, height, -60, 804);
+  var y60 = map(mouseY, 0, height, -60, 806);
+
+  // ec colors
+  var wizFrom = color(0, 0, 0);
+  var wizTo = color(232, 4, 1);
+  var wizInterA = lerpColor(wizFrom, wizTo, 0.33);
+  var wizInterB = lerpColor(wizFrom, wizTo, 0.66);
+
+  var glindaFrom = color(157, 98, 152);
+  var glindaTo = color(61, 191, 252);
+  var glindaInterA = lerpColor(glindaFrom, glindaTo, 0.33);
+  var glindaInterB = lerpColor(glindaFrom, glindaTo, 0.66);
+
+  var hY = map(mouseY, 0, height, 0, 45);
+
+  // KANSAS
+  if (state < 2) {
+    image(stormy, 0, 0, 0);
+    textSize(32);
+    fill(255);
+    textAlign(CENTER);
+    text("Welcome to", width / 2, 100);
+    textSize(52);
+    text("Some of Oz", width / 2, 155);
+
+    var disappear;
+    if (state > 1) {
+      disappear = 0;
+    } else {
+      disappear = 255;
     }
 
-    for (var i = -3 * height; i < 3 * height; i += 37) {
-      rx = 76;
-      gx = 233;
-      bx = 254;
-      stroke(rx, gx, bx);
-      line(-3 * width, i, 3 * width, i);
-    }
-    pop();
-  } else if (mouseButton == CENTER) {
-    background(0, 0, 196 - w * 0.9, 7);
-    push();
-    translate(width * 1.75, height * 0.75);
-    rotate(angle * 0.9);
+    tint(255, disappear);
+    image(shift, 820, 652);
+    noTint();
+    fill(184, 182, 160, disappear);
+    noStroke();
+    textSize(11);
+    textFont("Helvetica");
+    text(`F\nR\nI\nE\nN\nD\nL\nY`, 1018, 669);
+    stroke(61, 58, 51, disappear);
+    strokeWeight(3);
+    line(1006, 654, 1031, 654);
+    stroke(50, 50, 44, disappear);
+    line(1031, 654, 1031, 771);
+    stroke(8, 8, 8, disappear);
+    line(1030, 771, 1005, 771);
     strokeWeight(1);
-    for (let i = -150; i < 2 * width + 150; i += 100 * 1.6) {
-      for (let j = -150; j < 2 * height + 150; j += 100 * 1.6) {
-        let r = random(60);
-        stroke(255);
-        point(width - i * r, 91 * r + j);
+
+    fill(0);
+    textSize(24);
+    noStroke();
+    textFont("MiTicaRegular");
+    text(
+      "To proceed, type one of the following, then press 'Enter'",
+      width / 3,
+      height * 0.75
+    );
+    text(
+      "(first line is here,  second line is somewhere over the...)",
+      width / 3,
+      height * 0.79
+    );
+    text(
+      "dorothy   ·   toto   ·    house    ·   tornado   ·   all",
+      width / 3,
+      height * 0.83
+    );
+    stroke(0);
+    line(150, 747, 610, 747);
+    noStroke();
+    text(
+      "yellow brick road   ·   emerald city   ·   flying monkeys",
+      width / 3,
+      height * 0.87
+    );
+    textSize(42);
+    text(typed, width / 3, height * 0.935);
+
+    // set up tornado
+    if (state == 1.4 || state == 1.9) {
+      noStroke();
+      fill(187, 198, 204, 0 + hY);
+      strokeWeight(1);
+      // tornado shape
+      ellipseMode(CORNER);
+      ellipse(mouseX - 971, y1, 879, 60); //1
+      ellipse(mouseX - 856, y2, 757, 60);
+      ellipse(mouseX - 799, y3, 652, 60);
+      ellipse(mouseX - 765, y4, 562, 60);
+
+      ellipse(mouseX - 736, y5, 485, 60); //2
+      ellipse(mouseX - 711, y6, 418, 60);
+      ellipse(mouseX - 693, y7, 360, 59);
+      ellipse(mouseX - 681, y8, 310, 59);
+
+      ellipse(mouseX - 673, y9, 267, 58); //3
+      ellipse(mouseX - 667, y10, 231, 58);
+      ellipse(mouseX - 663, y11, 199, 57);
+      ellipse(mouseX - 661, y12, 172, 56);
+
+      ellipse(mouseX - 659, y13, 148, 55); //4
+      ellipse(mouseX - 657, y14, 119, 54);
+      ellipse(mouseX - 655, y15, 103, 53);
+      ellipse(mouseX - 655, y16, 97, 52);
+
+      ellipse(mouseX - 657, y17, 92, 50); //5
+      ellipse(mouseX - 659, y18, 87, 48);
+      ellipse(mouseX - 663, y19, 82, 46);
+      ellipse(mouseX - 666, y20, 77, 44);
+
+      ellipse(mouseX - 670, y21, 72, 42); //6
+      ellipse(mouseX - 674, y22, 67, 41);
+      ellipse(mouseX - 678, y23, 62, 30);
+      ellipse(mouseX - 681, y24, 57, 29);
+
+      ellipse(mouseX - 689, y25, 52, 28); //7
+      ellipse(mouseX - 693, y26, 47, 27);
+      ellipse(mouseX - 697, y27, 42, 25);
+      ellipse(mouseX - 701, y28, 37, 23);
+
+      ellipse(mouseX - 704, y29, 35, 22); //8
+      ellipse(mouseX - 709, y30, 33, 21);
+      ellipse(mouseX - 713, y31, 30, 20);
+      ellipse(mouseX - 715, y32, 28, 19);
+
+      ellipse(mouseX - 719, y32b, 26, 18);
+
+      ellipse(mouseX - 723, y33, 24, 17); //9
+      ellipse(mouseX - 725, y34, 22, 16);
+      ellipse(mouseX - 728, y35, 20, 15);
+      ellipse(mouseX - 730, y36, 18, 14);
+
+      ellipse(mouseX - 731, y37, 17, 13); //10
+      ellipse(mouseX - 732, y38, 16, 12);
+      ellipse(mouseX - 733, y39, 15, 11);
+      ellipse(mouseX - 734, y40, 14, 11);
+
+      ellipse(mouseX - 735, y41, 12, 10); //11
+      ellipse(mouseX - 736, y42, 12, 10);
+      ellipse(mouseX - 737, y43, 11, 9);
+      ellipse(mouseX - 738, y44, 11, 9);
+
+      ellipse(mouseX - 739, y45, 10, 8); //12
+      ellipse(mouseX - 740, y46, 10, 8);
+      ellipse(mouseX - 740, y47, 9, 7);
+      ellipse(mouseX - 741, y48, 9, 7);
+
+      ellipse(mouseX - 741, y49, 8, 6); //13
+      ellipse(mouseX - 742, y50, 8, 6);
+      ellipse(mouseX - 742, y51, 7, 5);
+      ellipse(mouseX - 743, y52, 7, 5);
+
+      ellipse(mouseX - 743, y53, 6, 4); //14
+      ellipse(mouseX - 744, y54, 6, 4);
+      ellipse(mouseX - 744, y55, 5, 3);
+      ellipse(mouseX - 745, y56, 5, 3);
+
+      ellipse(mouseX - 745, y57, 4, 2); //14
+      ellipse(mouseX - 746, y58, 4, 2);
+      ellipse(mouseX - 746, y59, 3, 1);
+      ellipse(mouseX - 746, y60, 3, 1);
+
+      fill(187, 198, 204, 0 + hY * 0.65);
+      beginShape();
+      curveVertex(mouseX - width * 0.661 + 10, 821);
+      curveVertex(mouseX - width * 0.661 + 10, 821);
+      curveVertex(mouseX - width * 0.67, mouseY);
+
+      curveVertex(mouseX - width * 0.623 + 4, y32 + 5);
+      curveVertex(mouseX - width * 0.623 + 2, y32 + 5);
+      curveVertex(mouseX - width * 0.677, mouseY);
+      curveVertex(mouseX - width * 0.661, 821);
+      endShape();
+
+      strokeWeight(1);
+
+      //clouds of debris
+      fill(100, hY);
+      noStroke();
+
+      ellipse(mouseX - 785, 853, 60, 38);
+      ellipse(mouseX - 780, 843, 60, 38);
+      ellipse(mouseX - 777, 840, 80, 22);
+      ellipse(mouseX - 772, 842, 80, 22);
+
+      ellipse(mouseX - 755, 850, 60, 38);
+      ellipse(mouseX - 750, 850, 60, 38);
+      ellipse(mouseX - 745, 850, 80, 22);
+      ellipse(mouseX - 767, 860, 80, 22);
+
+      ellipse(mouseX - width * 0.691, 860, 80, 48);
+      ellipse(mouseX - width * 0.697, 860, 80, 48);
+      ellipse(mouseX - width * 0.694, 824, 90, 32);
+      ellipse(mouseX - width * 0.73, 830, 90, 32);
+
+      ellipse(mouseX - width * 0.677, 843, 30, 19);
+      ellipse(mouseX - width * 0.673, 843, 30, 19);
+      ellipse(mouseX - width * 0.67, 848, 40, 11);
+      ellipse(mouseX - width * 0.666, 842, 40, 11);
+
+      ellipse(mouseX - width * 0.667, 853, 30, 19);
+      ellipse(mouseX - width * 0.663, 853, 30, 19);
+      ellipse(mouseX - width * 0.66, 858, 40, 11);
+      ellipse(mouseX - width * 0.656, 862, 40, 11);
+
+      ellipse(mouseX - width * 0.679, 862, 130, 59);
+      ellipse(mouseX - width * 0.73, 862, 130, 59);
+
+      textSize(28);
+      fill(255);
+      text("(move your mouse)", width * 0.78, height * 0.95);
+
+      if (state == 1.9) {
+        image(toto, 768, 597);
+        image(house, 102, 0);
+        image(dorothy, 371, 200);
+      }
+    } else if (state == 1.1) {
+      image(toto, 768, 597);
+    } else if (state == 1.2) {
+      image(house, 102, 0);
+    } else if (state == 1.3) {
+      image(dorothy, 371, 200);
+    }
+
+    // YELLOW BRICK ROAD
+  } else if (state >= 2 && state < 3) {
+    // ybr background
+    background(112, 173, 71);
+
+    // poppies
+    if (state == 2.4 || state == 2.9) {
+      randomSeed(0);
+      for (var i = -50; i < width + 50; i += 2) {
+        var red = int(random(0, 60));
+        var scalar = random(0.01, 0.65);
+        var py = random(200, 366);
+        poppy(i, py, red, scalar);
       }
     }
-    pop();
-  } else if (mouseButton == RIGHT) {
-    var rxx = map(mouseX, 0, width, 14, 201);
-    var gxx = map(mouseX, 0, width, 44, 255);
-    var bxx = map(mouseX, 0, width, 21, 255);
-    background(rxx, gxx + w * 10, bxx + z * 10, 2);
+
+    push();
+    translate(0, 316);
+    //yellow brick road fill (background)
+    noStroke();
+    strokeWeight(2);
+    fill(245, 205, 33);
+    beginShape();
+    curveVertex(430, 5);
+    curveVertex(430, 5);
+    curveVertex(600, 42);
+    curveVertex(463, 300);
+    curveVertex(width, 490);
+    curveVertex(width + 350, -150);
+    curveVertex(590, 1000);
+    curveVertex(0, height - 316);
+    curveVertex(5, 280);
+    curveVertex(590, 42);
+    curveVertex(430, 6);
+    curveVertex(430, 6);
+    endShape(CLOSE);
+
+    // brick pattern
+    stroke(112, 173, 71);
     strokeWeight(1);
-    stroke(0, 2);
-    for (let i = 5; i < height; i += 5) {
+
+    for (var i = 4; i <= height; i *= 1.2) {
       line(0, i, width, i);
     }
-  } else {
-    background(0, 5);
-  }
 
-  // set up eye colors
-  if (mouseIsPressed) {
-    if (mouseButton == LEFT) {
-      // blue
-      r = 55;
-      g = 40;
-      b = 252;
-      e = 240;
-      mult = 1.6;
-      boom = 20;
-      radius = 16;
-      pupils = radius / 2;
-      spacing = 107;
-      easing = 0.07;
-    } else if (mouseButton == RIGHT) {
-      // aqua
-      r = 86;
-      g = 206;
-      b = 175;
-      e = 250;
-      mult = 2.7;
-      boom = 40;
-      radius = 36;
-      pupils = radius / 2;
-      spacing = 283;
-      easing = 0.0108;
-    } else if (mouseButton == CENTER) {
-      // sky blue
-      r = 76;
-      g = 233;
-      b = 254;
-      e = 255;
-      mult = 1;
-      boom = 80;
-      radius = 118;
-      pupils = radius / 2;
-      spacing = 460;
-      easing = 0.09;
+    for (var j = 5; j <= height; j += 155) {
+      for (var k = 0; k <= width; k += 155) {
+        line(width / 2, -20, k, j);
+      }
     }
-  }
 
-  strokeWeight(weight * boom);
-  stroke(r, g, b - weight, 50 - 3 * weight);
-  line(x, y, px, py);
-  line(x + spacing, y, px + spacing, py);
-  px = x;
-  py = y;
+    pop();
 
-  // eyeline
-  if (mouseButton == LEFT) {
+    image(bluesky, 0, 0);
+
+    // hills
+    ellipseMode(CENTER);
     noStroke();
-  } else {
-    strokeWeight(5);
-    noFill();
-    // left
-    arc(x, y, radius * h * mult, radius * h + weight, 0, 360);
-    // right
-    arc(x + spacing, y, radius * h * mult, radius * h + weight, 0, 360);
-  }
+    fill(155, 150, 150); //greyish green
+    arc(285, 320, 190, 30, PI, TAU);
 
-  // left & center Button Brow
-  if (mouseButton == CENTER || mouseButton == LEFT) {
-    // big eye line
-    if (mouseButton == LEFT) {
-      noStroke();
-    } else {
-      strokeWeight(1);
-      stroke(r, g, b - weight, 50 - 3 * weight);
-      arc(x, y, radius * h * mult * 1.6, radius * h * 1.6, 0, 360);
-      arc(x + spacing, y, radius * h * mult * 1.6, radius * h * 1.6, 0, 360);
+    fill(77, 84, 91); //greyish blue
+    arc(30, 320, 400, 300, PI, TAU);
+
+    fill(120, 119, 87); //light green
+    arc(100, 320, 490, 128, PI, TAU);
+
+    fill(90, 98, 108); //medium grey
+    arc(100, 320, 250, 108, PI, TAU);
+
+    fill(123, 132, 78); //light green
+    arc(200, 320, 180, 30, PI, TAU);
+
+    fill(165, 150, 150); //greyish green
+    arc(700, 320, 400, 60, PI, TAU);
+
+    fill(77, 84, 91); //greyish blue
+    arc(770, 320, 410, 78, PI, TAU);
+
+    fill(89, 108, 46); //dark green
+    arc(870, 320, 400, 131, PI, TAU);
+
+    fill(123, 132, 78); //light green
+    arc(1130, 320, 600, 100, PI, TAU);
+
+    // poppies - foreground left
+    if (state == 2.4 || state == 2.9) {
+      randomSeed(0);
+      for (var i = -50; i < 398; i += 56) {
+        var red = int(random(0, 20));
+        var scalar = random(0.65, 1.25);
+        var py = random(304, 400);
+        poppy(i, py, red, scalar);
+      }
+
+      // poppies - foreground right
+      randomSeed(0);
+      for (var i = 600; i < width + 50; i += 16) {
+        var red = int(random(0, 20));
+        var scalar = random(0.65, 1.25);
+        var py = random(316, 700);
+        poppy(i, py, red, scalar);
+      }
     }
 
-    //left big arc
-    noStroke();
-    if (mouseIsPressed) {
-      fill(z, g - z, b + z);
-    } else {
-      fill(z, g - z, b + z, 50 - 3 * weight);
-    }
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      270 + 5 * weight,
-      10 - 5 * weight
-    );
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      30 + 5 * weight,
-      130 - 5 * weight
-    );
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      150 + 5 * weight,
-      250 - 5 * weight
-    );
-    // right big arc
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      180 + 5 * weight,
-      280 - 5 * weight
-    );
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      300 + 5 * weight,
-      40 - 5 * weight
-    );
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.6,
-      radius * h * 1.6,
-      60 + 5 * weight,
-      160 - 5 * weight
-    );
-
-    // center eyeline
-    strokeWeight(1);
-    if (mouseButton == LEFT) {
-      noStroke();
-    } else if (mouseIsPressed) {
-      stroke(r, g, b - weight);
-    } else {
-      stroke(r, g, b - weight, 50 - 3 * weight);
-      noFill();
-      arc(x, y, radius * h * mult * 1.3, radius * h * 1.3, 0, 360);
-      arc(x + spacing, y, radius * h * mult * 1.3, radius * h * 1.3, 0, 360);
-    }
-    // left center arc
-    if (mouseIsPressed) {
-      fill(230, 250 - 3 * weight);
-    } else {
-      fill(230, 50 - 3 * weight);
-    }
-    noStroke();
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      0 + 5 * weight,
-      100 - 5 * weight
-    );
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      120 + 5 * weight,
-      220 - 5 * weight
-    );
-    arc(
-      x,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      250 + 5 * weight,
-      350 - 5 * weight
-    );
-
-    // right center arc
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      201 + 5 * weight,
-      301 - 5 * weight
-    );
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      321 + 5 * weight,
-      61 - 5 * weight
-    );
-    arc(
-      x + spacing,
-      y,
-      radius * h * mult * 1.3,
-      radius * h * 1.3,
-      81 + 5 * weight,
-      181 - 5 * weight
-    );
-  }
-
-  // "whites" of the eyes
-  noStroke();
-  strokeWeight(1);
-  if (mouseIsPressed) {
-    fill(255, 250 - 3 * weight);
-  } else {
-    fill(255, 80 - 3 * weight);
-  }
-  // left;
-  arc(x, y, radius * h * mult, radius * h, 100 + 5 * weight, 190 - 5 * weight);
-
-  arc(x, y, radius * h * mult, radius * h, 210 + 5 * weight, 310 - 5 * weight);
-
-  arc(x, y, radius * h * mult, radius * h, 330 + 5 * weight, 80 - 5 * weight);
-
-  // right
-  arc(
-    x + spacing,
-    y,
-    radius * h * mult,
-    radius * h,
-    150 + 5 * weight,
-    240 - 5 * weight
-  );
-
-  arc(
-    x + spacing,
-    y,
-    radius * h * mult,
-    radius * h,
-    260 + 5 * weight,
-    360 - 5 * weight
-  );
-
-  arc(
-    x + spacing,
-    y,
-    radius * h * mult,
-    radius * h,
-    20 + 5 * weight,
-    130 - 5 * weight
-  );
-
-  noStroke();
-  // iris;
-  fill(r + z, g - z, b - z);
-  ellipse(x, y, radius - weight, radius - weight);
-  if (mouseButton == CENTER) {
-    fill(r + z, g - z, b + z);
-  }
-  ellipse(x + spacing, y, radius - weight, radius - weight);
-
-  // pupils
-  if (mouseY > height / 2) {
-    fill(0 + w, 200 - z, 170 - z);
-  } else {
-    fill(0 + z, 42, 82 + w);
-  }
-
-  ellipse(x, y, pupils - weight, pupils - weight);
-  ellipse(x + spacing, y, pupils - weight, pupils - weight);
-  // eyebrows no mouse
-  if (mouseButton != LEFT && mouseButton != RIGHT && mouseButton != CENTER) {
-    noFill();
-    stroke(234 - z, 107 - w, 20 - z, 40);
+    // yellow brick road outline (foreground)
+    push();
+    translate(0, 316);
+    stroke(52, 113, 51, 150);
     strokeWeight(2);
-    // left
-    arc(
-      x,
-      y,
-      radius * mult * 4 + weight * 30,
-      radius * 4 + weight * 70,
-      180,
-      275
-    );
-    // right
-    arc(
-      x + spacing,
-      y,
-      radius * mult * 4 + weight * 30,
-      radius * 4 + weight * 70,
-      270,
-      350
-    );
-    // lines under eyes
-    stroke(234 - z, 107 - w, 20 - z, 5);
-    arc(x - 7, y, radius * mult * 4, radius * 4, 18, 88);
-    arc(x + spacing + 7, y, radius * mult * 4, radius * 4, 100, 160);
-
-    // some shade over little yellow eyes
-    noStroke();
-    fill(r, g - w, b - z, 1);
-    arc(x - 7, y, radius * mult * 4, radius * 4, 0, 360);
-    arc(x + spacing + 7, y, radius * mult * 4, radius * 4, 0, 360);
-  } else if (mouseButton == RIGHT) {
-    // eyebrows - right
     noFill();
-    stroke(234 - z, 107 - w, 20 - z);
-    strokeWeight(3);
-    // left
-    arc(x, y, radius * mult * 3, radius * 3, 200, 335);
+    beginShape();
+    curveVertex(430, 5);
+    curveVertex(430, 5);
+    curveVertex(600, 42);
+    curveVertex(463, 300);
+    curveVertex(width, 490);
+    curveVertex(width + 350, -150);
+    curveVertex(590, 1000);
+    curveVertex(0, height - 316);
+    curveVertex(5, 280);
+    curveVertex(590, 42);
+    curveVertex(430, 6);
+    curveVertex(430, 6);
+    endShape(CLOSE);
+    pop();
 
-    // right
-    arc(x + spacing, y, radius * mult * 3, radius * 3, 210, 340);
+    if (state == 2.1) {
+      image(scarecrow, 70, 193);
+    } else if (state == 2.2) {
+      image(lion, 390, 193);
+    } else if (state == 2.3) {
+      image(tinMan, 732, 412);
+    } else if (state == 2.9) {
+      image(tinMan, 732, 412);
+      image(lion, 390, 193);
+      image(scarecrow, 70, 193);
+      fill(196, 204, 227, 60);
+      strokeWeight(1);
+      stroke(22, 83, 21);
+      textSize(52);
+      text("The Merry Old Land of Oz", width / 2, 120);
+    }
+    fill(0);
+    textSize(24);
+    noStroke();
+    text(
+      "What happened? Like before, your choices are:",
+      width / 3,
+      height * 0.74
+    );
+    text(
+      "lion  ·  tinman  ·  scarecrow  ·  poppies  ·  all",
+      width / 3,
+      height * 0.78
+    );
+    text(
+      "kansas  ·  emerald city  ·  flying monkeys",
+      width / 3,
+      height * 0.82
+    );
+    textSize(42);
+    text(typed, width / 3, height * 0.95);
 
-    strokeWeight(1);
-    stroke(234 - z, 107 - w, 20 - z, 30);
-    arc(x, y + 90, radius * mult * 2, radius * 2, 280, 325);
-    arc(x + spacing, y + 90, radius * mult * 2, radius * 2, 230, 265);
+    // FLYING MONKEYS
+  } else if (state >= 3 && state < 4) {
+    background(163, 167, 205);
+    noStroke();
 
-    // eyelashes
-    // left
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 193, 194);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 196, 197);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 199, 200);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 202, 203);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 205, 206);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 208, 209);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 211, 212);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 214, 215);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 217, 218);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 220, 221);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 223, 224);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 226, 227);
+    for (var i = 18; i < height; i += 328) {
+      for (var j = 0; j < width; j += 328) {
+        image(flymonkey1, j, i);
+        image(flymonkey2, 164 + j, 164 + i);
+      }
+    }
 
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 229, 230);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 232, 233);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 235, 236);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 238, 239);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 241, 242);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 244, 245);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 247, 248);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 250, 251);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 253, 254);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 256, 257);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 259, 260);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 262, 263);
+    if (state == 3.1) {
+      image(witch, 373, 320);
+    } else if (state == 3.2) {
+      fill(92, 22, 12);
+      rect(0, height - 63, 373, 15); // crystal ball frame
+      image(ball, -127, 542);
+    } else if (state == 3.3) {
+      image(guards, 770, 8);
+    } else if (state == 3.9) {
+      fill(214, 42, 25);
+      rect(0, height - 63, 373, 15); // crystal ball frame
+      image(witch, 373, 320);
+      image(ball, -127, 542);
+      image(guards, 770, 8);
+    }
+    // black frame
+    fill(0);
+    rect(0, 0, width, 18);
+    rect(0, height - 52, width, 52);
+    // text instructions
+    fill(244, 42, 25);
+    textSize(24);
+    text(
+      "Should you explore, or escape, that is the question...",
+      width / 2,
+      height * 0.65
+    );
+    text("witch  ·  guards  ·  crystal ball  ·  all", width / 2, height * 0.69);
+    text(
+      "kansas  ·  emerald city  ·  yellow brick road",
+      width / 2,
+      height * 0.73
+    );
+    text(`Uh-oh!!\nYou're in the`, 245, 140);
+    textSize(42);
+    text(typed, width / 2, height * 0.85);
+    text(`Witch's\nCastle`, 245, 248);
 
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 265, 266);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 268, 269);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 271, 272);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 274, 275);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 277, 278);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 280, 281);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 283, 284);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 286, 287);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 289, 290);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 292, 293);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 295, 296);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 298, 299);
+    // EMERALD CITY
+  } else if (state >= 4) {
+    background(140, 129, 135);
+    image(ozSky, 0, 0);
 
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 301, 302);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 304, 305);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 307, 308);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 310, 311);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 313, 314);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 316, 317);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 319, 320);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 322, 323);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 325, 326);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 328, 329);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 331, 332);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 334, 335);
+    if (state == 4.9) {
+      // rays
+      push();
+      stroke(166, 203, 211, 10);
+      strokeWeight(40);
+      translate(width / 2, height / 2);
+      var angle = -QUARTER_PI / 6.0;
+      for (var i = 0; i < 61; i++) {
+        line(0, 0, 750, 0);
+        rotate(angle);
+      }
+      pop();
+    }
 
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 337, 338);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 340, 341);
-    arc(x, y, radius * mult * 2.5, radius * 2.2, 343, 344);
+    // background halos
+    noFill();
+    stroke(166, 203, 211, 50);
+    strokeWeight(40);
+    ellipse(width / 2, height / 2, 300, 300);
+    ellipse(width / 2, height / 2, 600, 600);
 
-    //right eyelashes
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 199, 200);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 202, 203);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 205, 206);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 208, 209);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 211, 212);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 214, 215);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 217, 218);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 220, 221);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 223, 224);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 226, 227);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 229, 230);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 232, 233);
+    // draw the towers
+    randomSeed(0);
+    for (var i = 120; i < width - 100; i += 18) {
+      var green = int(random(0, 91));
+      var ozScalar = random(0.25, 1.0);
+      var ty = random(766, 200);
+      ozTower(i, ty, green, ozScalar);
+    }
 
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 235, 236);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 238, 239);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 241, 242);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 244, 245);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 247, 248);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 250, 251);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 253, 254);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 256, 257);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 259, 260);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 262, 263);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 265, 266);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 268, 269);
+    noStroke();
+    // wizard
+    if (state == 4.2) {
+      fill(0);
+      rect(0, 0, 322, height);
+      image(wiz, 62, 40);
+      // glinda the good witch
+    } else if (state == 4.3) {
+      fill(157, 98, 152);
+      rect(822, 0, 400, height);
+      image(glinda, 822, 87);
+      // ruby slippers
+    } else if (state == 4.5) {
+      fill(232, 4, 1);
+      rect(0, 0, 322, height);
+      image(ruby, 77, 675);
+      // balloon
+    } else if (state == 4.4) {
+      fill(61, 191, 252);
+      rect(822, 0, 400, height);
+      image(balloon, 822, 675);
+    } else if (state == 4.9) {
+      // wizard lerp
+      fill(wizFrom);
+      rect(0, 0, 322, height * 0.25);
+      fill(wizInterA);
+      rect(0, height * 0.25, 322, 121);
+      fill(wizInterB);
+      rect(0, 630, 322, 58);
+      fill(wizTo);
+      rect(0, 675, 322, height * 0.25);
 
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 271, 272);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 274, 275);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 277, 278);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 280, 281);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 283, 284);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 286, 287);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 289, 290);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 292, 293);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 295, 296);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 298, 299);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 301, 302);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 304, 305);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 307, 308);
+      // glinda lerp
+      fill(glindaFrom);
+      rect(822, 0, 400, height * 0.25);
+      fill(glindaInterA);
+      rect(822, 286, 400, 58);
+      fill(glindaInterB);
+      rect(822, 630, 322, 58);
+      fill(glindaTo);
+      rect(822, 675, 400, 300);
 
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 310, 311);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 313, 314);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 316, 317);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 319, 320);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 322, 323);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 325, 326);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 328, 329);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 331, 332);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 334, 335);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 337, 338);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 340, 341);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 343, 344);
-    arc(x + spacing, y, radius * mult * 2.5, radius * 2.2, 346, 347);
+      image(balloon, 822, 675);
+      image(ruby, 77, 675);
+      image(glinda, 822, 87);
+      image(wiz, 62, 40);
+      tint(255, 128);
+      image(wizFire, 322, 300);
+      noTint();
+
+      // ec text
+      fill(201, 253, 143, 150);
+      strokeWeight(1, 150);
+      stroke(0);
+      push();
+      translate(width / 2, height / 2);
+      var angle = -QUARTER_PI / 6.0;
+      for (var i = 0; i < ec.length; i++) {
+        text(ec[i], 300, 0);
+        rotate(angle);
+      }
+      pop();
+    }
+
+    // text instructions
+    fill(0);
+    noStroke();
+    textSize(24);
+    text("You know the ropes...", width / 2, height * 0.81);
+    text(
+      "wizard  ·  glinda  ·  ruby  ·  balloon  ·  all",
+      width / 2,
+      height * 0.84
+    );
+    text(
+      "kansas  ·  flying monkeys  ·  yellow brick road",
+      width / 2,
+      height * 0.87
+    );
+    textSize(42);
+    text(typed, width / 2, height * 0.95);
   }
-  angle += 1 * speed;
-  count++;
+}
+
+function poppy(x, y, r, s) {
+  ellipseMode(CENTER);
+  push();
+  translate(x, y);
+  scale(s);
+  fill(250 - r, 60 - r, 27 + r);
+  stroke(112, 173, 71); //same as green backgr
+  strokeWeight(2);
+  ellipse(0, 0, 25, 17);
+  ellipse(20, 10, 25, 17);
+  ellipse(-15, 15, 25, 17);
+  ellipse(3, 18, 25, 17);
+
+  ellipse(50, 35, 25, 17);
+  ellipse(70, 45, 25, 17);
+  ellipse(53, 48, 25, 17);
+
+  pop();
+}
+
+function ozTower(x, y, g, s) {
+  ellipseMode(CENTER);
+  // tower
+  var emerald = color(113 - g, 159 - g / 2, 87 - g);
+  push();
+  translate(x, y);
+  scale(s);
+  fill(emerald); // emerald green value
+  stroke(emerald);
+  strokeWeight(2);
+  arc(0, 0, 40, 40, PI, TAU);
+  rect(-20, 0, 40, 1800);
+
+  // shine
+  noStroke();
+  fill(214, 255, 51, 80); //chartreuse
+  rect(-20, 0, 10, 10);
+  triangle(-20, 0, -10, 0, -15, -35);
+  triangle(-10, 0, -10, 10, 10, 5);
+  triangle(-20, 10, -10, 10, -15, 45);
+  triangle(-20, 0, -20, 10, -40, 5);
+
+  // brighter shine
+  fill(214, 255, 101, 140);
+  rect(-20, 0, 10, 10);
+  triangle(-20, 0, -10, 0, -15, -20);
+  triangle(-10, 0, -10, 10, 5, 5);
+  triangle(-20, 10, -10, 10, -15, 30);
+  triangle(-20, 0, -20, 10, -35, 5);
+
+  // blur center
+  fill(255, 160);
+  noStroke();
+  ellipse(-15, 5, 8, 21);
+
+  // brightest shine
+  fill(231, 255, 230);
+  beginShape();
+  vertex(-20, 5);
+  vertex(-15, 0);
+  vertex(-10, 5);
+  vertex(-15, 10);
+  endShape();
+
+  // lines in shine
+  stroke(255, 130);
+  strokeWeight(1);
+  line(-15, 0, -15, 1160);
+  line(-10, 5, 5, 5);
+
+  //line for definition
+  stroke(0, 30);
+  line(-20, 13, -20, 1800);
+
+  pop();
 }
