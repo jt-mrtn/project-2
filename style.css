@@ -312,34 +312,10 @@ article {
   padding-bottom: 30px;
 }
 
-.btn {
-  display: flexbox;
-  text-align: center;
-  text-decoration: none;
-  margin: 10px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background-color: #143c60;
-  border-color: #143c60;
-}
-
-.btn-dracaena {
-  font-family: Robus, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: lighter;
-  font-style: normal;
-  font-size: 56px;
-}
-
-.btn-eyes {
-  font-family: "IndustrialRegular", "Montserrat", sans-serif;
-  font-weight: lighter;
-  font-style: normal;
-  font-size: 34px;
-}
-
-.btn-sm {
-  padding: 1px 5px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
+@media screen and (max-width: 635px) {
+  article {
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+  }
 }
