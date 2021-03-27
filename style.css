@@ -1,10 +1,345 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: black;
+/* CSS for JT Portfolio website */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Rock+Salt&display=swap");
+
+@font-face {
+  font-family: Robus;
+  src: url(./projects/draceana/Robus-BWqOd.otf);
 }
 
-canvas {
-  display: block;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #143c60;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 42px; /* same as footer, to keep at bottom of viewport */
+  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+header {
+  height: 360px;
+  /* all images are photos taken by me, JT Martin */
+  background: url(images/trees.jpg);
+  background-size: cover;
+}
+
+@media screen and (max-width: 635px) {
+  header {
+    height: 160px;
+  }
+}
+
+#container {
+  min-height: 100%;
+  min-width: 220px;
+  max-width: 980px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  text-align: center;
+  padding: 170px 0px 0px 0px;
+  color: #ffffff;
+  font-family: "Rock Salt", cursive;
+  font-size: 40px;
+  margin: auto;
+}
+
+@media screen and (max-width: 635px) {
+  h1 {
+    padding: 80px 0px 0px 0px;
+    font-size: 20px;
+  }
+}
+
+h2 {
+  text-align: center;
+  color: #f4f4f4;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+@media screen and (max-width: 635px) {
+  h2 {
+    font-size: 90%;
+  }
+}
+
+h3 {
+  color: #ffd147;
+  font-family: "Rock Salt", cursive;
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 635px) {
+  h3 {
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+}
+
+h4 {
+  font-family: "IndustrialRegular", "Montserrat", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  text-align: left;
+  color: #ff79ff;
+  font-size: 34px;
+}
+
+nav {
+  float: right;
+}
+
+header nav {
+  padding: 10px 10px 10px 10px;
+  margin: 60px 20px 0 0;
+  color: #f4f4f4;
+  font-family: "Montserrat", sans-serif;
+  font-size: 110%;
+  text-align: right;
+}
+
+@media screen and (max-width: 635px) {
+  header nav {
+    margin: 20px 10px 0 0;
+    font-size: 90%;
+  }
+}
+
+footer nav {
+  margin-right: 30px;
+  padding: 0;
+}
+
+footer img {
+  margin: 0;
+  padding: 0;
+}
+
+main img {
+  float: right;
+  border-bottom-style: outset;
+  border-bottom-color: #246cae;
+  border-bottom-width: thick;
+  margin: 10px 5px 0 0;
+  width: 170px;
+}
+
+@media screen and (max-width: 635px) {
+  main img {
+    margin: 5px 5px 10px 10px;
+    width: 25%;
+  }
+}
+
+.remove-und {
+  text-decoration: none;
+}
+
+main:after,
+img:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+footer:after,
+img:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+main {
+  background-color: #194c7a;
+  width: 100%;
+  /* flex: 1; */
+}
+
+.main-area {
+  padding: 30px 30px 30px 30px;
+}
+
+@media screen and (max-width: 635px) {
+  .main-area {
+    padding: 10px 10px 20px 10px;
+  }
+}
+
+main p,
+li {
+  font-family: "Montserrat", sans-serif;
+  font-size: 100%;
+  color: #fefffa;
+}
+
+@media screen and (max-width: 635px) {
+  main p,
+  li {
+    font-size: 90%;
+  }
+}
+/* establishing anchor tag look and behavior */
+a {
+  font-family: "Montserrat", sans-serif;
+  font-size: 100%;
+  color: #fefffa;
+}
+
+header a {
+  text-decoration: none;
+}
+
+.proj-link a:link {
+  color: #ff79ff;
+}
+
+a:link {
+  color: #fefffa;
+}
+
+a:visited {
+  color: #ffd147;
+}
+
+a:hover {
+  color: #52e4ff;
+  font-size: 105%;
+}
+
+.proj-link a:hover {
+  color: #52e4ff;
+}
+
+a:active {
+  color: rgb(146, 252, 146);
+}
+
+/* for 404 page not found */
+.error {
+  background-color: #ffffff;
+  text-align: center;
+  color: #194c7a;
+  margin: auto;
+}
+
+.footer-style {
+  width: 100%;
+  height: 42px;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-size: 85%;
+  font-weight: lighter;
+  color: #979797;
+  background-color: #000000;
+  padding: 26px 0 0 30px;
+  /* position: absolute; */
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 950px;
+}
+
+@media screen and (max-width: 635px) {
+  .footer-style {
+    height: 35px;
+    font-size: 75%;
+    padding: 16px 0 0 10px;
+  }
+}
+
+ul,
+ol {
+  text-align: left;
+}
+
+main div section p {
+  color: #f4f4f4;
+  text-align: left;
+  font-size: 90%;
+  font-weight: lighter;
+}
+
+main div section hr {
+  width: 60%;
+  height: 1px;
+  border: none;
+  padding: 1px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 635px) {
+  main div section hr {
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/*  Projects */
+
+article img {
+  float: right;
+  border-bottom-style: outset;
+  border-bottom-color: #246cae;
+  border-bottom-width: thick;
+  margin: 0px 0px 25px 25px;
+  width: 170px;
+}
+
+article {
+  text-align: justify;
+  padding-top: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 30px;
+}
+
+.btn {
+  display: flexbox;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #143c60;
+  border-color: #143c60;
+}
+
+.btn-dracaena {
+  font-family: Robus, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 56px;
+}
+
+.btn-eyes {
+  font-family: "IndustrialRegular", "Montserrat", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 34px;
+}
+
+.btn-sm {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
