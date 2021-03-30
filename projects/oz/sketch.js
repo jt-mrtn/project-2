@@ -408,7 +408,7 @@ function draw() {
     // set up tornado
     if (state == 1.4 || state == 1.9) {
       noStroke();
-      fill(187, 198, 204, 0 + hY);
+      fill(187, 198, 204, -15 + hY);
       // tornado shape
       ellipseMode(CORNER);
       ellipse(mouseX - x2 - 400, y1 - 135, 1240, 60); //1
