@@ -7,6 +7,12 @@ Author: JT Martin
 var state = 1.0;
 var typed = "";
 
+// for the tornado
+var t_angle = 0.0;
+var t_offset = 70;
+var t_scalar = 30;
+var t_speed = 0.01;
+
 // set up state logic
 function keyTyped() {
   if (key == 1) {
@@ -161,83 +167,166 @@ function setup() {
 }
 
 function draw() {
-  //tornado image
-  var y1 = map(mouseY, 0, height, -60, -30); //1
-  var y2 = map(mouseY, 0, height, -60, 0);
-  var y3 = map(mouseY, 0, height, -60, 30);
-  var y4 = map(mouseY, 0, height, -60, 60);
+  //tornado image x axis
+  //0.4 diff
+  var x1 = t_offset + cos(t_angle - 1) * t_scalar;
+  var x2 = t_offset + cos(t_angle - 0.6) * t_scalar;
+  var x3 = t_offset + cos(t_angle - 0.2) * t_scalar;
 
-  var y5 = map(mouseY, 0, height, -60, 90); //2
-  var y6 = map(mouseY, 0, height, -60, 119);
-  var y7 = map(mouseY, 0, height, -60, 147);
-  var y8 = map(mouseY, 0, height, -60, 175);
+  var x4 = t_offset + cos(t_angle + 0.2) * t_scalar;
+  var x5 = t_offset + cos(t_angle + 0.6) * t_scalar;
+  var x6 = t_offset + cos(t_angle + 0.8) * t_scalar;
+  //0.3;
+  var x7 = t_offset + cos(t_angle + 1) * t_scalar;
+  var x8 = t_offset + cos(t_angle + 0.5) * t_scalar;
+  var x9 = t_offset + cos(t_angle + 0.1) * t_scalar;
 
-  var y9 = map(mouseY, 0, height, -60, 203); //3
-  var y10 = map(mouseY, 0, height, -60, 230);
-  var y11 = map(mouseY, 0, height, -60, 257);
-  var y12 = map(mouseY, 0, height, -60, 283);
+  var x10 = t_offset + cos(t_angle - 0.28) * t_scalar;
+  var x11 = t_offset + cos(t_angle - 0.75) * t_scalar;
+  var x12 = t_offset + cos(t_angle - 0.96) * t_scalar;
 
-  var y13 = map(mouseY, 0, height, -60, 309); //4
-  var y14 = map(mouseY, 0, height, -60, 334);
-  var y15 = map(mouseY, 0, height, -60, 359);
-  var y16 = map(mouseY, 0, height, -60, 383);
+  var x13 = t_offset + cos(t_angle - 1) * t_scalar;
+  var x14 = t_offset + cos(t_angle - 0.89) * t_scalar;
+  var x15 = t_offset + cos(t_angle - 0.45) * t_scalar;
+  //.25
+  var x16 = t_offset + cos(t_angle - 0.1) * t_scalar;
+  var x17 = t_offset + cos(t_angle - 0.15) * t_scalar;
+  var x18 = t_offset + cos(t_angle - 0.4) * t_scalar;
 
-  var y17 = map(mouseY, 0, height, -60, 407); //5
-  var y18 = map(mouseY, 0, height, -60, 430);
-  var y19 = map(mouseY, 0, height, -60, 453);
-  var y20 = map(mouseY, 0, height, -60, 475);
+  var x19 = t_offset + cos(t_angle - 0.65) * t_scalar;
+  var x20 = t_offset + cos(t_angle - 0.9) * t_scalar;
+  var x21 = t_offset + cos(t_angle - 0.75) * t_scalar;
 
-  var y21 = map(mouseY, 0, height, -60, 497); //6
-  var y22 = map(mouseY, 0, height, -60, 518);
-  var y23 = map(mouseY, 0, height, -60, 539);
-  var y24 = map(mouseY, 0, height, -60, 559);
+  var x22 = t_offset + cos(t_angle - 0.5) * t_scalar;
+  var x23 = t_offset + cos(t_angle - 0.25) * t_scalar;
+  var x24 = t_offset + cos(t_angle) * t_scalar;
+  //.2
+  var x25 = t_offset + cos(t_angle + 0.25) * t_scalar;
+  var x26 = t_offset + cos(t_angle + 0.45) * t_scalar;
+  var x27 = t_offset + cos(t_angle + 0.68) * t_scalar;
 
-  var y25 = map(mouseY, 0, height, -60, 579); //7
-  var y26 = map(mouseY, 0, height, -60, 598);
-  var y27 = map(mouseY, 0, height, -60, 616);
-  var y28 = map(mouseY, 0, height, -60, 633);
+  var x28 = t_offset + cos(t_angle + 0.89) * t_scalar;
+  var x29 = t_offset + cos(t_angle + 1) * t_scalar;
+  var x30 = t_offset + cos(t_angle + 0.92) * t_scalar;
 
-  var y29 = map(mouseY, 0, height, -60, 649); //8
-  var y30 = map(mouseY, 0, height, -60, 664);
-  var y31 = map(mouseY, 0, height, -60, 678);
-  var y32 = map(mouseY, 0, height, -60, 691);
+  var x31 = t_offset + cos(t_angle + 0.66) * t_scalar;
+  var x32 = t_offset + cos(t_angle + 0.4) * t_scalar;
+  var x32b = t_offset + cos(t_angle + 0.2) * t_scalar;
+  var x33 = t_offset + cos(t_angle) * t_scalar;
+  //.15
+  var x34 = t_offset + cos(t_angle - 0.2) * t_scalar;
+  var x35 = t_offset + cos(t_angle - 0.35) * t_scalar;
+  var x36 = t_offset + cos(t_angle - 0.5) * t_scalar;
 
-  var y32b = map(mouseY, 0, height, -60, 703);
+  var x37 = t_offset + cos(t_angle - 0.65) * t_scalar;
+  var x38 = t_offset + cos(t_angle - 0.85) * t_scalar;
+  var x39 = t_offset + cos(t_angle - 0.96) * t_scalar;
 
-  var y33 = map(mouseY, 0, height, -60, 714); //9
-  var y34 = map(mouseY, 0, height, -60, 724);
-  var y35 = map(mouseY, 0, height, -60, 733);
-  var y36 = map(mouseY, 0, height, -60, 741);
+  var x40 = t_offset + cos(t_angle - 1) * t_scalar;
+  var x41 = t_offset + cos(t_angle - 0.97) * t_scalar;
+  var x42 = t_offset + cos(t_angle - 0.84) * t_scalar;
+  //.1
+  var x43 = t_offset + cos(t_angle - 0.65) * t_scalar;
+  var x44 = t_offset + cos(t_angle - 0.45) * t_scalar;
+  var x45 = t_offset + cos(t_angle - 0.35) * t_scalar;
 
-  var y37 = map(mouseY, 0, height, -60, 748); //10
-  var y38 = map(mouseY, 0, height, -60, 754);
-  var y39 = map(mouseY, 0, height, -60, 759);
-  var y40 = map(mouseY, 0, height, -60, 763);
+  var x46 = t_offset + cos(t_angle - 0.25) * t_scalar;
+  var x47 = t_offset + cos(t_angle - 0.15) * t_scalar;
+  var x48 = t_offset + cos(t_angle - 0.05) * t_scalar;
 
-  var y41 = map(mouseY, 0, height, -60, 767); //11
-  var y42 = map(mouseY, 0, height, -60, 770);
-  var y43 = map(mouseY, 0, height, -60, 772);
-  var y44 = map(mouseY, 0, height, -60, 774);
+  var x49 = t_offset + cos(t_angle + 0.05) * t_scalar;
+  var x50 = t_offset + cos(t_angle + 0.15) * t_scalar;
+  var x51 = t_offset + cos(t_angle + 0.25) * t_scalar;
+  //.15
+  var x52 = t_offset + cos(t_angle + 0.4) * t_scalar;
+  var x53 = t_offset + cos(t_angle + 0.55) * t_scalar;
+  var x54 = t_offset + cos(t_angle + 0.7) * t_scalar;
+  //.2
+  var x55 = t_offset + cos(t_angle + 0.88) * t_scalar;
+  var x56 = t_offset + cos(t_angle + 0.98) * t_scalar;
+  var x57 = t_offset + cos(t_angle + 1) * t_scalar;
 
-  var y45 = map(mouseY, 0, height, -60, 776); //12
-  var y46 = map(mouseY, 0, height, -60, 778);
-  var y47 = map(mouseY, 0, height, -60, 780);
-  var y48 = map(mouseY, 0, height, -60, 782);
+  var x58 = t_offset + cos(t_angle + 0.96) * t_scalar;
+  var x59 = t_offset + cos(t_angle + 0.86) * t_scalar;
+  var x60 = t_offset + cos(t_angle + 0.7) * t_scalar;
 
-  var y49 = map(mouseY, 0, height, -60, 784); //13
-  var y50 = map(mouseY, 0, height, -60, 786);
-  var y51 = map(mouseY, 0, height, -60, 788);
-  var y52 = map(mouseY, 0, height, -60, 790);
+  //tornado image y axis
+  var y1 = map(mouseY, 0, height, -60, 93); //1
+  var y2 = map(mouseY, 0, height, -60, 133);
+  var y3 = map(mouseY, 0, height, -60, 173);
+  var y4 = map(mouseY, 0, height, -60, 213);
 
-  var y53 = map(mouseY, 0, height, -60, 792); //14
-  var y54 = map(mouseY, 0, height, -60, 794);
-  var y55 = map(mouseY, 0, height, -60, 796);
-  var y56 = map(mouseY, 0, height, -60, 798);
+  var y5 = map(mouseY, 0, height, -60, 253); //2
+  var y6 = map(mouseY, 0, height, -60, 283);
+  var y7 = map(mouseY, 0, height, -60, 313);
+  var y8 = map(mouseY, 0, height, -60, 343);
 
-  var y57 = map(mouseY, 0, height, -60, 800); //15
-  var y58 = map(mouseY, 0, height, -60, 802);
-  var y59 = map(mouseY, 0, height, -60, 804);
-  var y60 = map(mouseY, 0, height, -60, 806);
+  var y9 = map(mouseY, 0, height, -60, 373); //3
+  var y10 = map(mouseY, 0, height, -60, 403);
+  var y11 = map(mouseY, 0, height, -60, 428);
+  var y12 = map(mouseY, 0, height, -60, 453);
+
+  var y13 = map(mouseY, 0, height, -60, 473); //4
+  var y14 = map(mouseY, 0, height, -60, 493);
+  var y15 = map(mouseY, 0, height, -60, 513);
+  var y16 = map(mouseY, 0, height, -60, 530);
+
+  var y17 = map(mouseY, 0, height, -60, 547); //5
+  var y18 = map(mouseY, 0, height, -60, 567);
+  var y19 = map(mouseY, 0, height, -60, 579);
+  var y20 = map(mouseY, 0, height, -60, 594);
+
+  var y21 = map(mouseY, 0, height, -60, 609); //6
+  var y22 = map(mouseY, 0, height, -60, 624);
+  var y23 = map(mouseY, 0, height, -60, 636);
+  var y24 = map(mouseY, 0, height, -60, 648);
+
+  var y25 = map(mouseY, 0, height, -60, 660); //7
+  var y26 = map(mouseY, 0, height, -60, 670);
+  var y27 = map(mouseY, 0, height, -60, 680);
+  var y28 = map(mouseY, 0, height, -60, 690);
+
+  var y29 = map(mouseY, 0, height, -60, 698); //8
+  var y30 = map(mouseY, 0, height, -60, 706);
+  var y31 = map(mouseY, 0, height, -60, 714);
+  var y32 = map(mouseY, 0, height, -60, 722);
+
+  var y32b = map(mouseY, 0, height, -60, 729);
+
+  var y33 = map(mouseY, 0, height, -60, 736); //9
+  var y34 = map(mouseY, 0, height, -60, 743);
+  var y35 = map(mouseY, 0, height, -60, 750);
+  var y36 = map(mouseY, 0, height, -60, 756);
+
+  var y37 = map(mouseY, 0, height, -60, 762); //10
+  var y38 = map(mouseY, 0, height, -60, 768);
+  var y39 = map(mouseY, 0, height, -60, 774);
+  var y40 = map(mouseY, 0, height, -60, 780);
+
+  var y41 = map(mouseY, 0, height, -60, 786); //11
+  var y42 = map(mouseY, 0, height, -60, 792);
+  var y43 = map(mouseY, 0, height, -60, 798);
+  var y44 = map(mouseY, 0, height, -60, 804);
+
+  var y45 = map(mouseY, 0, height, -60, 810); //12
+  var y46 = map(mouseY, 0, height, -60, 815);
+  var y47 = map(mouseY, 0, height, -60, 820);
+  var y48 = map(mouseY, 0, height, -60, 825);
+
+  var y49 = map(mouseY, 0, height, -60, 830); //13
+  var y50 = map(mouseY, 0, height, -60, 835);
+  var y51 = map(mouseY, 0, height, -60, 840);
+  var y52 = map(mouseY, 0, height, -60, 845);
+
+  var y53 = map(mouseY, 0, height, -60, 850); //14
+  var y54 = map(mouseY, 0, height, -60, 855);
+  var y55 = map(mouseY, 0, height, -60, 860);
+  var y56 = map(mouseY, 0, height, -60, 865);
+
+  var y57 = map(mouseY, 0, height, -60, 870); //15
+  var y58 = map(mouseY, 0, height, -60, 875);
+  var y59 = map(mouseY, 0, height, -60, 880);
+  var y60 = map(mouseY, 0, height, -60, 885);
 
   // ec colors
   var wizFrom = color(0, 0, 0);
@@ -320,131 +409,99 @@ function draw() {
     if (state == 1.4 || state == 1.9) {
       noStroke();
       fill(187, 198, 204, 0 + hY);
-      strokeWeight(1);
       // tornado shape
       ellipseMode(CORNER);
-      ellipse(mouseX - 971, y1, 879, 60); //1
-      ellipse(mouseX - 856, y2, 757, 60);
-      ellipse(mouseX - 799, y3, 652, 60);
-      ellipse(mouseX - 765, y4, 562, 60);
+      ellipse(mouseX - x2 - 400, y1 - 135, 1240, 60); //1
+      ellipse(mouseX - x1 - 360, y1 - 90, 1140, 60); //1
+      ellipse(mouseX - x2 - 300, y1 - 45, 1018, 60);
 
-      ellipse(mouseX - 736, y5, 485, 60); //2
-      ellipse(mouseX - 711, y6, 418, 60);
-      ellipse(mouseX - 693, y7, 360, 59);
-      ellipse(mouseX - 681, y8, 310, 59);
+      ellipse(mouseX - x1 - 220, y1, 878, 60); //1
+      ellipse(mouseX - x2 - 160, y2, 757, 60);
+      ellipse(mouseX - x3 - 100, y3, 652, 60);
+      ellipse(mouseX - x4 - 50, y4, 562, 60);
 
-      ellipse(mouseX - 673, y9, 267, 58); //3
-      ellipse(mouseX - 667, y10, 231, 58);
-      ellipse(mouseX - 663, y11, 199, 57);
-      ellipse(mouseX - 661, y12, 172, 56);
+      ellipse(mouseX - x5, y5, 485, 60); //2
+      ellipse(mouseX - x6, y6, 418, 60);
+      ellipse(mouseX - x7, y7, 360, 59);
+      ellipse(mouseX - x8, y8, 310, 59);
 
-      ellipse(mouseX - 659, y13, 148, 55); //4
-      ellipse(mouseX - 657, y14, 119, 54);
-      ellipse(mouseX - 655, y15, 103, 53);
-      ellipse(mouseX - 655, y16, 97, 52);
+      ellipse(mouseX - x9, y9, 267, 58); //3
+      ellipse(mouseX - x10, y10, 231, 58);
+      ellipse(mouseX - x11, y11, 199, 57);
+      ellipse(mouseX - x12, y12, 172, 56);
 
-      ellipse(mouseX - 657, y17, 92, 50); //5
-      ellipse(mouseX - 659, y18, 87, 48);
-      ellipse(mouseX - 663, y19, 82, 46);
-      ellipse(mouseX - 666, y20, 77, 44);
+      ellipse(mouseX - x13, y13, 148, 55); //4
+      ellipse(mouseX - x14, y14, 119, 54);
+      ellipse(mouseX - x15, y15, 103, 53);
+      ellipse(mouseX - x16, y16, 97, 52);
 
-      ellipse(mouseX - 670, y21, 72, 42); //6
-      ellipse(mouseX - 674, y22, 67, 41);
-      ellipse(mouseX - 678, y23, 62, 30);
-      ellipse(mouseX - 681, y24, 57, 29);
+      ellipse(mouseX - x17, y17, 92, 50); //5
+      ellipse(mouseX - x18, y18, 87, 48);
+      ellipse(mouseX - x19, y19, 82, 46);
+      ellipse(mouseX - x20, y20, 77, 44);
 
-      ellipse(mouseX - 689, y25, 52, 28); //7
-      ellipse(mouseX - 693, y26, 47, 27);
-      ellipse(mouseX - 697, y27, 42, 25);
-      ellipse(mouseX - 701, y28, 37, 23);
+      ellipse(mouseX - x21, y21, 72, 42); //6
+      ellipse(mouseX - x22, y22, 67, 41);
+      ellipse(mouseX - x23, y23, 62, 30);
+      ellipse(mouseX - x24, y24, 57, 29);
 
-      ellipse(mouseX - 704, y29, 35, 22); //8
-      ellipse(mouseX - 709, y30, 33, 21);
-      ellipse(mouseX - 713, y31, 30, 20);
-      ellipse(mouseX - 715, y32, 28, 19);
+      ellipse(mouseX - x25, y25, 52, 28); //7
+      ellipse(mouseX - x26, y26, 47, 27);
+      ellipse(mouseX - x27, y27, 42, 25);
+      ellipse(mouseX - x28, y28, 37, 23);
 
-      ellipse(mouseX - 719, y32b, 26, 18);
+      ellipse(mouseX - x29, y29, 35, 22); //8
+      ellipse(mouseX - x30, y30, 33, 21);
+      ellipse(mouseX - x31, y31, 30, 20);
+      ellipse(mouseX - x32, y32, 28, 19);
 
-      ellipse(mouseX - 723, y33, 24, 17); //9
-      ellipse(mouseX - 725, y34, 22, 16);
-      ellipse(mouseX - 728, y35, 20, 15);
-      ellipse(mouseX - 730, y36, 18, 14);
+      ellipse(mouseX - x32b, y32b, 26, 18);
 
-      ellipse(mouseX - 731, y37, 17, 13); //10
-      ellipse(mouseX - 732, y38, 16, 12);
-      ellipse(mouseX - 733, y39, 15, 11);
-      ellipse(mouseX - 734, y40, 14, 11);
+      ellipse(mouseX - x33, y33, 24, 17); //9
+      ellipse(mouseX - x34, y34, 22, 16);
+      ellipse(mouseX - x35, y35, 20, 15);
+      ellipse(mouseX - x36, y36, 18, 14);
 
-      ellipse(mouseX - 735, y41, 12, 10); //11
-      ellipse(mouseX - 736, y42, 12, 10);
-      ellipse(mouseX - 737, y43, 11, 9);
-      ellipse(mouseX - 738, y44, 11, 9);
+      ellipse(mouseX - x37, y37, 17, 13); //10
+      ellipse(mouseX - x38, y38, 16, 12);
+      ellipse(mouseX - x39, y39, 15, 11);
+      ellipse(mouseX - x40, y40, 14, 11);
 
-      ellipse(mouseX - 739, y45, 10, 8); //12
-      ellipse(mouseX - 740, y46, 10, 8);
-      ellipse(mouseX - 740, y47, 9, 7);
-      ellipse(mouseX - 741, y48, 9, 7);
+      ellipse(mouseX - x41, y41, 12, 10); //11
+      ellipse(mouseX - x42, y42, 12, 10);
+      ellipse(mouseX - x43, y43, 11, 9);
+      ellipse(mouseX - x44, y44, 11, 9);
 
-      ellipse(mouseX - 741, y49, 8, 6); //13
-      ellipse(mouseX - 742, y50, 8, 6);
-      ellipse(mouseX - 742, y51, 7, 5);
-      ellipse(mouseX - 743, y52, 7, 5);
+      ellipse(mouseX - x45, y45, 10, 8); //12
+      ellipse(mouseX - x46, y46, 10, 8);
+      ellipse(mouseX - x47, y47, 9, 7);
+      ellipse(mouseX - x48, y48, 9, 7);
 
-      ellipse(mouseX - 743, y53, 6, 4); //14
-      ellipse(mouseX - 744, y54, 6, 4);
-      ellipse(mouseX - 744, y55, 5, 3);
-      ellipse(mouseX - 745, y56, 5, 3);
+      ellipse(mouseX - x49, y49, 8, 6); //13
+      ellipse(mouseX - x50, y50, 8, 6);
+      ellipse(mouseX - x51, y51, 7, 5);
+      ellipse(mouseX - x52, y52, 7, 5);
 
-      ellipse(mouseX - 745, y57, 4, 2); //14
-      ellipse(mouseX - 746, y58, 4, 2);
-      ellipse(mouseX - 746, y59, 3, 1);
-      ellipse(mouseX - 746, y60, 3, 1);
+      ellipse(mouseX - x53, y53, 6, 4); //14
+      ellipse(mouseX - x54, y54, 6, 4);
+      ellipse(mouseX - x55, y55, 5, 3);
+      ellipse(mouseX - x56, y56, 5, 3);
 
-      fill(187, 198, 204, 0 + hY * 0.65);
-      beginShape();
-      curveVertex(mouseX - width * 0.661 + 10, 821);
-      curveVertex(mouseX - width * 0.661 + 10, 821);
-      curveVertex(mouseX - width * 0.67, mouseY);
-
-      curveVertex(mouseX - width * 0.623 + 4, y32 + 5);
-      curveVertex(mouseX - width * 0.623 + 2, y32 + 5);
-      curveVertex(mouseX - width * 0.677, mouseY);
-      curveVertex(mouseX - width * 0.661, 821);
-      endShape();
-
-      strokeWeight(1);
+      ellipse(mouseX - x57, y57, 4, 2); //15
+      ellipse(mouseX - x58, y58, 4, 2);
+      ellipse(mouseX - x59, y59, 3, 1);
+      ellipse(mouseX - x60, y60, 3, 1);
 
       //clouds of debris
       fill(100, hY);
       noStroke();
 
-      ellipse(mouseX - 785, 853, 60, 38);
-      ellipse(mouseX - 780, 843, 60, 38);
-      ellipse(mouseX - 777, 840, 80, 22);
-      ellipse(mouseX - 772, 842, 80, 22);
-
-      ellipse(mouseX - 755, 850, 60, 38);
-      ellipse(mouseX - 750, 850, 60, 38);
-      ellipse(mouseX - 745, 850, 80, 22);
-      ellipse(mouseX - 767, 860, 80, 22);
-
-      ellipse(mouseX - width * 0.691, 860, 80, 48);
-      ellipse(mouseX - width * 0.697, 860, 80, 48);
-      ellipse(mouseX - width * 0.694, 824, 90, 32);
-      ellipse(mouseX - width * 0.73, 830, 90, 32);
-
-      ellipse(mouseX - width * 0.677, 843, 30, 19);
-      ellipse(mouseX - width * 0.673, 843, 30, 19);
-      ellipse(mouseX - width * 0.67, 848, 40, 11);
-      ellipse(mouseX - width * 0.666, 842, 40, 11);
-
-      ellipse(mouseX - width * 0.667, 853, 30, 19);
-      ellipse(mouseX - width * 0.663, 853, 30, 19);
-      ellipse(mouseX - width * 0.66, 858, 40, 11);
-      ellipse(mouseX - width * 0.656, 862, 40, 11);
-
-      ellipse(mouseX - width * 0.679, 862, 130, 59);
-      ellipse(mouseX - width * 0.73, 862, 130, 59);
+      ellipse(mouseX - x56 - 20, 813, 80, 48);
+      ellipse(mouseX - x57 - 40, 820, 80, 38);
+      ellipse(mouseX - x58 - 27, 820, 80, 38);
+      ellipse(mouseX - x59 - 20, 828, 60, 38);
+      ellipse(mouseX - x60 - 25, 832, 70, 38);
+      ellipse(mouseX - x60 - 30, 842, 70, 38);
 
       textSize(28);
       fill(255);
@@ -455,6 +512,8 @@ function draw() {
         image(house, 102, 0);
         image(dorothy, 371, 200);
       }
+
+      t_angle += t_speed;
     } else if (state == 1.1) {
       image(toto, 768, 597);
     } else if (state == 1.2) {
