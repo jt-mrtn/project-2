@@ -99,6 +99,7 @@ function draw() {
     noStroke();
     for (let i = -29; i < height; i += 30) {
       for (let j = -1111; j < width * 3; j += 210) {
+        var ovalWidth = random(144, 160);
         fill(0, x4);
         ellipse(x1 + j - k, i + scaleY, 200, 20);
         fill(36 + x4, 246 - x4, 26 + x4, x4);
@@ -111,7 +112,7 @@ function draw() {
           //249,
           x4
         );
-        ellipse(x1 + j - k, i + scaleY, 160, 18);
+        ellipse(x1 + j - k, i + scaleY, ovalWidth, 18);
       }
       k += 30;
     }
