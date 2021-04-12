@@ -5,9 +5,10 @@ var rodrigo;
 // animation
 var x = 0;
 var z = 0;
+var easing = 0.04;
 var direction = 1;
-var easing = 0.02; ////
-var scaleX, scaleY, moveX1, moveX2, moveX3;
+// var time10 = 10000;
+var scaleX, scaleY, moveX1, moveX2, moveX3, startMillis;
 
 // for the side-to-side ovals
 var angle = 0.0;
@@ -18,7 +19,7 @@ var speed = 0.03; ///speed///
 var x3 = 7;
 
 // text
-var click = "Click your mouse to hear and experience the audio viz";
+var click = "Click your mouse";
 
 function preload() {
   rodrigo = loadSound("rodrigo.ogg"); // 10 seconds
@@ -39,9 +40,16 @@ function setup() {
   // reverb time of 12 seconds, decay rate of 0.2%
   reverb.process(rodrigo, 12, 0.2);
   reverb.amp(6);
+
+  // set up beginning of time
+  if (startMillis == null) {
+    startMillis = millis();
+  }
 }
 
 function draw() {
+  var now = millis();
+  var tDiff = now - startMillis;
   background(5, 201, 255, 35);
   var x0 = cos(bgAngle + 0.05) * scalar * easing;
   bgAngle += speed * easing;
@@ -55,7 +63,14 @@ function draw() {
     for (var j = -54; j < width * 2.5; j += 4) {
       ellipse(j + x0 - h, i * 2, 12 + j * 0.016, 12 + i * 0.16);
     }
-    h += 35;
+
+    //h += 3;
+
+    if (z == 0) {
+      h += 3;
+    } else if (z == 1) {
+      h += 15 + tDiff * easing * 0.005;
+    }
   }
 
   if (z == 1) {
@@ -104,13 +119,15 @@ function draw() {
     // diagonal lines moving left to right
     stroke(0, 255 - x4);
     strokeWeight(1);
-    for (var i = -width * 2; i <= width * 2; i += 10) {
+    for (var i = -width * 1.4; i <= width * 2; i += 10) {
+      stroke(0, 255 - x4);
       line(i + x, 0, i + x - 714, height);
+      stroke(5, 201, 255, 255 - x4);
       line(i + x - 714, 0, i + x, height);
     }
 
     // moving left to right then back to left
-    if (x3 > width * 3.1) {
+    if (x3 > width * 2.7) {
       direction = -direction; // flip direction
     }
 
