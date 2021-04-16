@@ -1,32 +1,33 @@
 // declare variables
 // sound
-var rodrigo;
+let rodrigo;
 
 // animation
-var x = 0;
-var z = 0;
-var easing = 0.04;
-var direction = 1;
+let x = 0;
+let z = 0;
+let direction = 1;
+const easing = 0.04;
+
 // var time10 = 10000;
-var scaleX, scaleY, moveX1, moveX2, moveX3, startMillis;
+let scaleX, scaleY, moveX1, moveX2, moveX3, startMillis;
 
 // for the side-to-side ovals
-var angle = 0.0;
-var bgAngle = 0.0; // background angle
-var offset = 270;
-var scalar = 1111;
-var speed = 0.03; ///speed///
+let angle = 0.0;
+let bgAngle = 0.0; // background angle
+const offset = 270;
+const scalar = 1111;
+const speed = 0.03; ///speed///
 var x3 = 7;
 
 // text
-var click = "Click your mouse";
+const click = "Click your mouse";
 
 function preload() {
   rodrigo = loadSound("rodrigo.ogg"); // 10 seconds
 }
 
 function setup() {
-  createCanvas(1111, 660);
+  createCanvas(1111, 680);
   scaleX = width / 92;
   scaleY = height / 21;
   reverb = new p5.Reverb();
@@ -50,7 +51,7 @@ function setup() {
 function draw() {
   var now = millis();
   var tDiff = now - startMillis;
-  background(5, 201, 255, 35);
+  background(35, 178, 255, 35);
   var x0 = cos(bgAngle + 0.05) * scalar * easing;
   bgAngle += speed * easing;
 
@@ -58,7 +59,7 @@ function draw() {
   noFill();
   stroke(0);
   strokeWeight(1);
-  let h = 0;
+  var h = 0;
   for (var i = -14; i < height + 20; i += 15) {
     for (var j = -54; j < width * 2.5; j += 4) {
       ellipse(j + x0 - h, i * 2, 12 + j * 0.016, 12 + i * 0.16);
@@ -114,7 +115,7 @@ function draw() {
         );
         ellipse(x1 + j - k, i + scaleY, ovalWidth, 18);
       }
-      k += 30;
+      k += 32;
     }
 
     // diagonal lines moving left to right
@@ -144,24 +145,38 @@ function draw() {
     x += 11;
   }
 
-  // text at the top
+  // frame at the top
   fill(0);
   rect(0, 0, width, 104);
-  fill(5, 201, 249);
-  //noStroke();
-  textAlign(CENTER);
-  text("Music by Joaquín Rodrigo · Concierto pastoral", moveX3, 45);
-  text(click, moveX1, 80);
-  text(click, moveX2, 80);
-  //noFill();
-  moveX1 -= 5;
-  moveX2 += 5;
-  moveX3 -= 3;
+
+  // text at the top
+  if (z == 0) {
+    fill(35, 178, 255, 255);
+    //noStroke();
+    textAlign(CENTER);
+    text("Music by Joaquín Rodrigo · Concierto pastoral", moveX3, 45);
+    text(click, moveX1, 80);
+    text(click, moveX2, 80);
+    //noFill();
+    moveX1 -= 5;
+    moveX2 += 5;
+    moveX3 -= 3;
+  }
 }
 
 function mousePressed() {
   z++;
-  if (z > 1) z = 0;
+  if (z > 1) {
+    h = 0;
+    x = 0;
+    x3 = 7;
+    z = 0;
+    moveX1 = width + 30;
+    moveX2 = -30;
+    moveX3 = width + 10;
+    direction = 1;
+    startMillis = null;
+  }
 
   if (rodrigo.isPlaying()) {
     rodrigo.stop();
