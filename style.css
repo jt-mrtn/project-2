@@ -101,6 +101,15 @@ h4 {
   font-size: 34px;
 }
 
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 75%;
+  font-weight: lighter;
+  font-style: normal;
+  color: #b4b4b4;
+  /* text-align: right; */
+}
+
 nav {
   float: right;
 }
