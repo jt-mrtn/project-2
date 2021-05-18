@@ -7,7 +7,13 @@ let lives = 9;
 let state = 0;
 let scoreValue = 300;
 let yesBtnSize = 120;
-let interval = 3000;
+let interval1 = 1000;
+let interval2 = 2000;
+let interval3 = 3000;
+let interval4 = 4000;
+let interval5 = 5000;
+let interval6 = 6000;
+let interval7 = 7000;
 let mAngle = 0.0;
 let rAngle = 0.0;
 let rInterval = 150000;
@@ -18,13 +24,13 @@ let conquerText = ["CONGRATS!", "YOU", "HAVE", "REACHED", "EXPERT", "LEVEL"];
 let endText = ["WOULD", "YOU", "LIKE", "TO", "PLAY", "AGAIN?"];
 let overText = [" ", " ", "GAME", "OVER"];
 let colors = [
-  [63, 184, 175, 110],
-  [127, 199, 175, 110],
-  [218, 216, 167, 110],
-  [255, 158, 157, 110],
-  [255, 61, 127, 110],
-  [102, 102, 255, 110],
-  [204, 0, 102, 110],
+  [63, 184, 175, 70],
+  [127, 199, 175, 70],
+  [218, 216, 167, 70],
+  [255, 158, 157, 70],
+  [255, 61, 127, 70],
+  [102, 102, 255, 70],
+  [204, 0, 102, 70],
 ];
 let expertColors = [
   [242, 15, 34, 100],
@@ -83,14 +89,61 @@ function draw() {
 }
 
 function drawIntro() {
+  background(0);
   textSize(30);
   noStroke();
   textFont("Arial");
   textAlign(CENTER, CENTER);
   let d = dist(mouseX, mouseY, centerX, centerY);
-  image(galaxy, 0, 0);
+  if (millis() > interval2) {
+    image(galaxy, 0, 0);
+  }
+  if (millis() > interval1) {
+    for (let i = 0; i < introText.length; i++) {
+      if (i < 4) {
+        x = i * 150;
+      } else {
+        x -= 150;
+      }
 
-  if (millis() > interval) {
+      fill(185, 70); //,170
+      rect(x + 525, i * 60 + 70, 150, 60);
+    }
+  }
+
+  if (millis() > interval3) {
+    for (let i = 0; i < introText.length; i++) {
+      if (i < 4) {
+        x = i * 150;
+      } else {
+        x -= 150;
+      }
+
+      fill(185, 70); //
+      rect(x + 525, i * 60 + 70, 150, 60);
+      fill(255, 70); //
+      rect(x + 225, i * 60 + 70, 150, 60);
+    }
+  }
+
+  if (millis() > interval4) {
+    for (let i = 0; i < introText.length; i++) {
+      if (i < 4) {
+        x = i * 150;
+      } else {
+        x -= 150;
+      }
+
+      fill(185, 70); //
+      rect(x + 525, i * 60 + 70, 150, 60);
+      fill(255, 70); //
+      rect(x + 225, i * 60 + 70, 150, 60);
+      fill(colors[i]);
+      rect(x + 75, i * 60 + 70, 150, 60);
+    }
+  }
+
+  if (millis() > interval5) {
     for (let i = 0; i < introText.length; i++) {
       let currentWord = introText[i];
 
@@ -100,14 +153,12 @@ function drawIntro() {
         x -= 150;
       }
 
+      fill(185, 70);
+      rect(x + 525, i * 60 + 70, 150, 60);
+      fill(255, 70);
+      rect(x + 225, i * 60 + 70, 150, 60);
       fill(colors[i]);
       rect(x + 75, i * 60 + 70, 150, 60);
-      fill(255, 170);
-      rect(x + 225, i * 60 + 70, 150, 60);
-      fill(0, 0);
-      rect(x + 375, i * 60 + 70, 150, 60);
-      fill(185, 170);
-      rect(x + 525, i * 60 + 70, 150, 60);
       fill(255);
       text(currentWord, x + 75, i * 60 + 70, 150, 60);
     }
@@ -122,31 +173,37 @@ function drawIntro() {
     stroke(185);
   }
 
-  strokeWeight(4);
-  ellipse(centerX, centerY, yesBtnSize * 1.6, yesBtnSize);
+  if (millis() > interval7) {
+    strokeWeight(4);
+    ellipse(centerX, centerY, yesBtnSize * 1.6, yesBtnSize);
 
-  if (d < (yesBtnSize * 1.6) / 2) {
-    fill(255, random(255), 0);
-  } else {
-    fill(0, 255, 0);
+    if (d < (yesBtnSize * 1.6) / 2) {
+      fill(255, random(255), 0);
+    } else {
+      fill(0, 255, 0);
+    }
+    noStroke();
+    textSize(40);
+    text("YES", centerX, centerY);
+    fill(165);
+    textSize(14);
+    text("START", centerX, centerY + 30);
   }
-  noStroke();
-  textSize(40);
-  text("YES", centerX, centerY);
-  fill(165);
-  textSize(14);
-  text("START", centerX, centerY + 30);
 
   //draw box with description & instructions
-  fill(185, 170);
-  rect(75, height - 50, 1050, 40);
-  fill(0);
-  textSize(13);
-  textAlign(LEFT);
-  text(gameName, 95, height - 28);
+  if (millis() > interval6) {
+    fill(185, 170);
+    noStroke();
+    rect(75, height - 50, 1050, 40);
+    fill(0);
+    textSize(13);
+    textAlign(LEFT);
+    text(gameName, 95, height - 28);
+  }
 
   // draw title
   textFont(font);
+  noStroke();
   textAlign(LEFT);
   fill(255, 170);
   textSize(95);
@@ -378,6 +435,7 @@ function mousePressed() {
     wabern.stop();
   } else if (state == 1 || state == 2 || state == 3) {
     wabern.play();
+    //wabern.loop();
   }
 }
 
