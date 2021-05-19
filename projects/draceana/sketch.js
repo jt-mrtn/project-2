@@ -20,6 +20,9 @@ var hue;
 
 var click = 1;
 
+const mouseDirections = "move and click your mouse";
+let moveX1, moveX2;
+
 function preload() {
   font = loadFont("Robus-BWqOd.otf"); // (via license: Trans ID 6L014138AG223504L Creative Fabrica BV)
   img1 = loadImage("images/plant1.jpg");
@@ -40,6 +43,8 @@ function setup() {
   background(0);
   textFont(font);
   center = width / 3;
+  moveX1 = width;
+  moveX2 = -width * 0.1;
 }
 
 function draw() {
@@ -116,6 +121,7 @@ function draw() {
 
   fill(0);
   strokeWeight(2);
+  textFont(font);
   textSize(320);
   var offset = 0;
   for (let j = yn; j < height * 1.5; j += 169) {
@@ -137,6 +143,15 @@ function draw() {
   rect(0, 0, width, 150);
   // bottom
   rect(0, height - 150, width, 150);
+
+  // moving mouse directions
+  textFont("Lucida Sans Unicode");
+  fill(35, 178, 254);
+  textSize(20);
+  text(mouseDirections, moveX1, 80);
+  text(mouseDirections, moveX2, 80);
+  moveX1 -= 3;
+  moveX2 += 3;
 
   // graphic items in the foreground · · · · · · ·
 
