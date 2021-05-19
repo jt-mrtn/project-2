@@ -3,7 +3,8 @@
 
 // 1. Left, right and middle mouse buttons cause eyes to change.
 // 2. Press Esc key after pressing right button.
-// 3. There are 4 different sizes. Refresh page to return to the smallest.
+// 3. There are 4 different sizes. Another left mouse click will return to the smallest
+//    (and add eyebrows).
 
 var x = 0;
 var y = 0;
@@ -92,6 +93,7 @@ function draw() {
     mouseX < width / 2 ? (bx = 130) : (bx = 38);
     background(rx, gx + z / 5, bx, 7);
     strokeWeight(10);
+    // rotating diamonds
     push();
     translate(width / 2, height / 2);
     rotate(angle);
@@ -110,19 +112,36 @@ function draw() {
       stroke(rx, gx, bx);
       line(-3 * width, i, 3 * width, i);
     }
-
-    // rotating diamonds
     pop();
+
+    // rotating twinkling stars
   } else if (mouseButton == CENTER) {
     background(0, 0, 196 - w * 0.9, 7);
     push();
     translate(width * 1.75, height * 0.75);
-    rotate(angle * 0.9);
+    rotate(angle * 0.5);
     strokeWeight(1);
     for (let i = -150; i < 2 * width + 150; i += 100 * 1.6) {
       for (let j = -150; j < 2 * height + 150; j += 100 * 1.6) {
-        let r = random(60);
+        let r = random(160);
+        let w = random(3);
         stroke(255);
+        strokeWeight(w);
+        point(width - i * r, 91 * r + j);
+      }
+    }
+    pop();
+
+    push();
+    translate(width * 1.75, height * 0.75);
+    rotate(angle * -0.5);
+    strokeWeight(1);
+    for (let i = -150; i < 2 * width + 150; i += 100 * 1.6) {
+      for (let j = -150; j < 2 * height + 150; j += 100 * 1.6) {
+        let r = random(160);
+        let w = random(3);
+        stroke(255);
+        strokeWeight(w);
         point(width - i * r, 91 * r + j);
       }
     }
