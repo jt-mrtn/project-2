@@ -671,17 +671,20 @@ function draw() {
     text(
       "What happened? Like before, your choices are:",
       width / 3,
-      height * 0.74
+      height * 0.735
     );
     text(
       "lion  ·  tinman  ·  scarecrow  ·  poppies  ·  all",
       width / 3,
-      height * 0.78
+      height * 0.775
     );
+    stroke(0);
+    line(150, 698, 610, 698);
+    noStroke();
     text(
       "kansas  ·  emerald city  ·  flying monkeys",
       width / 3,
-      height * 0.82
+      height * 0.815
     );
     textSize(42);
     text(typed, width / 3, height * 0.95);
@@ -726,6 +729,12 @@ function draw() {
       height * 0.65
     );
     text("witch  ·  guards  ·  crystal ball  ·  all", width / 2, height * 0.69);
+    stroke(244, 42, 25);
+    noFill();
+    strokeWeight(1.5);
+    line(345, height * 0.705, 800, height * 0.705);
+    noStroke();
+    fill(244, 42, 25);
     text(
       "kansas  ·  emerald city  ·  yellow brick road",
       width / 2,
@@ -845,10 +854,14 @@ function draw() {
       width / 2,
       height * 0.84
     );
+    stroke(0);
+    strokeWeight(1);
+    line(350, 755, 800, 755);
+    noStroke();
     text(
       "kansas  ·  flying monkeys  ·  yellow brick road",
       width / 2,
-      height * 0.87
+      height * 0.88
     );
     textSize(42);
     text(typed, width / 2, height * 0.95);
