@@ -40,12 +40,17 @@ let expertColors = [
   [217, 197, 160, 100],
   [127, 199, 175, 100],
 ];
+let invert = false;
 
 // sound
-let wabern, hit, scoreSound, bonusSound, tap;
+let orbit4, orbit5, hit, scoreSound, bonusSound, tap;
 // text
-let gameName = `UNIREVERS is a game about a strange universe that mirrors our own in reverse.  Control your star-eating planet with left & right arrows. Green/blue stars are nourishing.\nPurple bonus stars are even better. Avoid red stars; they're poisonous and could destroy you. Expert level is reached when the player reaches a score of 300. Good luck!`;
-let photo = `Astro images by NASA, Felix Mittermeier, Brett Ritchie, Raphael Nogueira, Ivana Cajina & Jack B on Unsplash`;
+let toggle1 = "green/blue";
+let toggle2 = "purple";
+let toggle3 = "red";
+let gameName1 = `UNIREVERS is a game about a strange universe that mirrors our own in reverse.  Control your star-eating planet with arrow keys. Green/blue stars are nourishing. Purple bonus \nstars are even better, restoring a life. Avoid red/black stars; they're poisonous and could destroy you. Expert level is reached when the player reaches a score of 300. Good luck!`;
+let gameName2 = `UNIREVERS is a game about a strange universe that mirrors our own in reverse.  Control your star-eating planet with arrow keys. Red/orange-red stars are nourishing. Green bonus \nstars are even better, restoring a life. Avoid cyan/white stars; they're poisonous and could destroy you. Expert level is reached when the player reaches a score of 300. Good luck!`;
+let photo = `Astro images by NASA, Felix Mittermeier, Brett Ritchie, Raphael Nogueira, Ivana Cajina, Modern Affliction & Jack B on Unsplash\nSound effects by Mixkit; music by yours truly 😎`;
 
 function preload() {
   // image files
@@ -58,7 +63,8 @@ function preload() {
   starry = loadImage("assets/stars.jpg");
   mosaic = loadImage("assets/mosaic.jpg");
   // sound files
-  wabern = loadSound("assets/wabern.ogg");
+  orbit4 = loadSound("assets/orbit4.ogg");
+  orbit5 = loadSound("assets/orbit5.ogg");
   hit = loadSound("assets/hit.ogg");
   scoreSound = loadSound("assets/score2.ogg");
   bonusSound = loadSound("assets/bonus.ogg");
@@ -72,6 +78,11 @@ function setup() {
   centerX = width / 2;
   centerY = 470;
   timer = millis();
+  // dark and light buttons
+  bDk = color(0, 0, 0);
+  bLt = color(0, 0, 0);
+  bgFalse = new Button(centerX + 250, centerY, 110, 30, bDk, "Dark Mode");
+  bgTrue = new Button(centerX + 400, centerY, 110, 30, bLt, "Light Mode");
 }
 
 function draw() {
@@ -97,6 +108,12 @@ function drawIntro() {
   let d = dist(mouseX, mouseY, centerX, centerY);
   if (millis() > interval2) {
     image(galaxy, 0, 0);
+    if (invert) {
+      filter(INVERT);
+      gameName = gameName2;
+    } else {
+      gameName = gameName1;
+    }
   }
   if (millis() > interval1) {
     for (let i = 0; i < introText.length; i++) {
@@ -105,8 +122,7 @@ function drawIntro() {
       } else {
         x -= 150;
       }
-
-      fill(185, 70); //,170
+      fill(185, 70);
       rect(x + 525, i * 60 + 70, 150, 60);
     }
   }
@@ -119,9 +135,9 @@ function drawIntro() {
         x -= 150;
       }
 
-      fill(185, 70); //
+      fill(185, 70);
       rect(x + 525, i * 60 + 70, 150, 60);
-      fill(255, 70); //
+      fill(255, 90);
       rect(x + 225, i * 60 + 70, 150, 60);
     }
   }
@@ -134,9 +150,9 @@ function drawIntro() {
         x -= 150;
       }
 
-      fill(185, 70); //
+      fill(185, 70);
       rect(x + 525, i * 60 + 70, 150, 60);
-      fill(255, 70); //
+      fill(255, 90);
       rect(x + 225, i * 60 + 70, 150, 60);
       fill(colors[i]);
       rect(x + 75, i * 60 + 70, 150, 60);
@@ -155,7 +171,7 @@ function drawIntro() {
 
       fill(185, 70);
       rect(x + 525, i * 60 + 70, 150, 60);
-      fill(255, 70);
+      fill(255, 90);
       rect(x + 225, i * 60 + 70, 150, 60);
       fill(colors[i]);
       rect(x + 75, i * 60 + 70, 150, 60);
@@ -188,6 +204,10 @@ function drawIntro() {
     fill(165);
     textSize(14);
     text("START", centerX, centerY + 30);
+
+    // background-changing buttons
+    bgFalse.render();
+    bgTrue.render();
   }
 
   //draw box with description & instructions
@@ -198,24 +218,23 @@ function drawIntro() {
     fill(0);
     textSize(13);
     textAlign(LEFT);
-    text(gameName, 95, height - 28);
+    text(gameName, 83, height - 28);
   }
 
   // draw title
   textFont(font);
   noStroke();
   textAlign(LEFT);
-  fill(255, 170);
+  fill(102, 102, 255, 170);
   textSize(95);
   text("UNIREVERS", 537, 81);
 }
 
 function drawPlaying() {
-  background(0);
-  image(starry, 0, 0);
+  image(galaxy, 0, 0);
   noCursor();
   textFont("Arial");
-
+  filter;
   for (let i = 0; i < stars.length; i++) {
     stars[i].update();
     stars[i].render();
@@ -232,6 +251,9 @@ function drawPlaying() {
 
   textSize(18);
   textAlign(LEFT);
+  if (invert) {
+    fill(0);
+  }
   text("Score: " + score, 10, 20);
   text("Lives: " + lives, 10, 40);
 }
@@ -241,7 +263,10 @@ function drawConquer() {
   textSize(30);
   textAlign(CENTER, CENTER);
   let d = dist(mouseX, mouseY, centerX, centerY);
-  image(milky, -600, -600);
+  if (invert) {
+    filter(INVERT);
+  }
+  image(mosaic, 0, 0);
 
   for (let i = 0; i < conquerText.length; i++) {
     let currentWord = conquerText[i];
@@ -283,15 +308,20 @@ function drawConquer() {
   text("MODE", centerX, centerY + 33);
   image(expSaturn, width * 0.7, height * 0.15);
   image(neptune, width * 0.1, height * 0.6);
+  if (invert) {
+    filter(INVERT);
+  }
 }
 
 function drawExpert() {
   noCursor();
-  background(0);
   push();
   translate(centerX, centerY);
   rotate(mAngle * 0.02);
-  image(milky, -900, -700);
+  if (invert) {
+    filter(INVERT);
+  }
+  image(milky, -1497, -1000);
   pop();
 
   for (let i = 0; i < stars.length; i++) {
@@ -306,6 +336,10 @@ function drawExpert() {
     gameOver();
   }
 
+  if (invert) {
+    fill(0);
+  }
+
   textSize(18);
   textAlign(LEFT);
   text("Score: " + score, 10, 20);
@@ -318,6 +352,9 @@ function drawEnd() {
   noStroke();
   cursor();
   image(mosaic, 0, 0);
+  if (invert) {
+    filter(INVERT);
+  }
   textSize(30);
   textAlign(CENTER);
   let d = dist(mouseX, mouseY, centerX, centerY);
@@ -375,12 +412,17 @@ function drawEnd() {
   fill(185);
   textSize(14);
   text("RESTART", centerX, centerY + 30);
+
+  // background-changing buttons
+  bgFalse.render();
+  bgTrue.render();
+
   // photo credits
   fill(185, 170);
-  rect(227, height - 41, 750, 25);
+  rect(190, height - 50, 830, 45);
   fill(0);
   textAlign(LEFT);
-  text(photo, 260, height - 27);
+  text(photo, 207, height - 27);
   // title
   textFont(font);
   textAlign(LEFT);
@@ -413,10 +455,13 @@ function startExpert() {
 
 function gameOver() {
   state = 4;
+  orbit4.stop();
+  orbit5.stop();
 }
 
 function gameConquered() {
   state = 2;
+  orbit4.stop();
 }
 
 function mousePressed() {
@@ -431,15 +476,32 @@ function mousePressed() {
     }
   }
   // trigger sound file
-  if (wabern.isPlaying()) {
-    wabern.stop();
-  } else if (state == 1 || state == 2 || state == 3) {
-    wabern.play();
-    //wabern.loop();
+  if (orbit4.isPlaying() || orbit5.isPlaying()) {
+    orbit4.stop();
+    orbit5.stop();
+  } else if (state == 1) {
+    orbit4.loop();
+    orbit4.setVolume(1.0);
+  } else if (state == 3) {
+    orbit5.loop();
+    orbit5.setVolume(1.0);
+  }
+
+  // light and dark modes
+  if (bgTrue.update()) {
+    invert = true;
+    toggle1 = "Red/orange-red";
+    toggle2 = "Green";
+    toggle3 = "Cyan/white";
+  } else if (bgFalse.update()) {
+    invert = false;
+    toggle1 = "Green/blue";
+    toggle2 = "Purple";
+    toggle3 = "Red";
   }
 }
 
-function Stellation(planet, glo) {
+function Stellation(planet) {
   noStroke();
   this.size = 20;
   this.radius1 = 2;
@@ -447,7 +509,12 @@ function Stellation(planet, glo) {
   this.npoints = 9;
   this.speed = 5;
   this.planet = planet;
-  this.glo = glo;
+
+  if (invert && state == 3) {
+    this.speed = 10;
+  } else if (invert) {
+    this.speed = 7;
+  }
 
   this.init = function () {
     this.x = random(20, width - 20);
@@ -521,6 +588,12 @@ function Planet() {
   this.color = color(255);
   this.offset = 0;
 
+  if (invert && state == 3) {
+    this.speed = 10;
+  } else if (invert) {
+    this.speed = 7;
+  }
+
   this.sinval = sin(rAngle);
   this.r1 = map(this.sinval, -1, 1, 0, 150);
   this.r2 = map(this.sinval, -1, 1, 0, 200);
@@ -536,6 +609,14 @@ function Planet() {
       this.x += this.speed;
     } else if (keyIsDown(LEFT_ARROW)) {
       this.x -= this.speed;
+    } else if (keyIsDown(UP_ARROW)) {
+      this.y -= this.speed;
+    } else if (keyIsDown(DOWN_ARROW)) {
+      this.y += this.speed;
+    } else if (this.y < 0) {
+      this.y = 0;
+    } else if (this.y + this.height > height) {
+      this.y = height - this.height;
     }
   };
 
@@ -547,6 +628,7 @@ function Planet() {
     this.y--;
     this.offset += 1;
     scoreSound.play();
+
     // collision/feedback animation
     stroke(0, 255, 0, 100);
     strokeWeight(this.r1 / 2);
@@ -579,6 +661,7 @@ function Planet() {
     this.width -= 2;
     this.height -= 2;
     this.y++;
+
     // collision/feedback animation
     stroke(255, 0, 0, 130);
     strokeWeight(this.r2 / 2);
@@ -613,6 +696,7 @@ function Planet() {
     this.width += 3;
     this.height += 3;
     this.y -= 3;
+
     // collision/feedback animation
     stroke(255, 0, 255, 200);
     strokeWeight(this.r2 / 2);
@@ -645,9 +729,15 @@ function Planet() {
     fill(this.color);
     if (score < scoreValue) {
       image(saturn, this.x, this.y, this.width, this.height);
+      if (invert) {
+        filter(INVERT);
+      }
       // if score reaches expert level, planet changes to jupiter
     } else {
       image(jupiter, this.x, this.y, this.width, this.height);
+      if (invert) {
+        filter(INVERT);
+      }
     }
     this.color = color(255);
   };
@@ -667,4 +757,33 @@ function star(x, y, radius1, radius2, npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
+}
+
+// for inverted mode buttons
+function Button(x, y, w, h, c, label) {
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  this.c = c;
+  this.label = label;
+
+  this.render = function () {
+    fill(185, 170);
+    noStroke();
+    rect(this.x, this.y, this.w, this.h, 20);
+    textAlign(CENTER, CENTER);
+    fill(0);
+    textSize(14);
+    text(this.label, this.x, this.y, this.w, this.h);
+  };
+
+  this.update = function () {
+    return (
+      mouseX > this.x &&
+      mouseX < this.x + this.w &&
+      mouseY > this.y &&
+      mouseY < this.y + this.h
+    );
+  };
 }
