@@ -1,0 +1,11 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* background-image: url("plant.jpg"); */
+  background-color: black;
+}
+
+canvas {
+  display: block;
+}
