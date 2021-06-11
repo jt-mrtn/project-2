@@ -1,6 +1,8 @@
 # project-2
 ## Portfolio Website -
-This is the first website I've created for a public audience. It was begun in partial fulfillment of Thinkful's Software Engineering course. I've since moved on to other things. I'm now exploring creative coding and will be uploading my projects here.
+This is the first website I've created for a public audience. It was begun in partial fulfillment of Thinkful's Software Engineering certification program. I've since moved on to other things.
+
+Recently I completed a course in creative coding for the visual arts and have included some of my work on the Projects page.
 
 This site contains the following pages:
 * Home
